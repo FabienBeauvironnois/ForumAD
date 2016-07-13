@@ -5,56 +5,55 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-		
-		<!--  Injection Address -->
+
+	<!-- Injection Address -->
 	<bean id="daoAddress" class="fr.adaming.forum.dao.AddressDaoImpl"></bean>
-	<bean id="serviceAddress"
-		class="fr.adaming.forum.service.AddressServiceImpl">
+	<bean id="serviceAddress" class="fr.adaming.forum.service.AddressServiceImpl">
 		<property name="addressDao" ref="daoAddress"></property>
 	</bean>
-	
+
 	<!--Injection Comment -->
 	<bean id="daoComment" class="fr.adaming.forum.dao.CommentDaoImpl"></bean>
 	<bean id="serviceComment" class="fr.adaming.forum.service.CommentServiceImpl">
-	<property name="commentDao" ref="daoComment"></property>
+		<property name="commentDao" ref="daoComment"></property>
 	</bean>
-	
+
 	<!--Injection Company -->
 	<bean id="daoCompany" class="fr.adaming.forum.dao.CompanyDaoImpl"></bean>
 	<bean id="serviceCompany" class="fr.adaming.forum.service.CompanyServiceImpl">
-	<property name="companyDao" ref="daoCompany"></property>
+		<property name="companyDao" ref="daoCompany"></property>
 	</bean>
-	
+
 	<!--Injection Formation -->
 	<bean id="daoFormation" class="fr.adaming.forum.dao.FormationDaoImpl"></bean>
 	<bean id="serviceFormation" class="fr.adaming.forum.service.FormationServiceImpl">
-	<property name="formationDao" ref="daoFormation"></property>
+		<property name="formationDao" ref="daoFormation"></property>
 	</bean>
-	
+
 	<!--Injection Role -->
 	<bean id="daoRole" class="fr.adaming.forum.dao.RoleDaoImpl"></bean>
 	<bean id="serviceRole" class="fr.adaming.forum.service.RoleServiceImpl">
-	<property name="roleDao" ref="daoRole"></property>
+		<property name="roleDao" ref="daoRole"></property>
 	</bean>
-	
+
 	<!--Injection Skill -->
 	<bean id="daoSkill" class="fr.adaming.forum.dao.SkillDaoImpl"></bean>
 	<bean id="serviceSkill" class="fr.adaming.forum.service.SkillServiceImpl">
-	<property name="skillDao" ref="daoSkill"></property>
+		<property name="skillDao" ref="daoSkill"></property>
 	</bean>
-	
+
 	<!--Injection Topic -->
 	<bean id="daoTopic" class="fr.adaming.forum.dao.TopicDaoImpl"></bean>
 	<bean id="serviceTopic" class="fr.adaming.forum.service.TopicServiceImpl">
-	<property name="topicDao" ref="daoTopic"></property>
+		<property name="topicDao" ref="daoTopic"></property>
 	</bean>
-	
+
 	<!--Injection User -->
 	<bean id="daoUser" class="fr.adaming.forum.dao.UserDaoImpl"></bean>
 	<bean id="serviceUser" class="fr.adaming.forum.service.UserServiceImpl">
-	<property name="userDao" ref="daoUser"></property>
+		<property name="userDao" ref="daoUser"></property>
 	</bean>
-	
+
 	<bean id="datasource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
@@ -72,15 +71,37 @@
 		</property>
 
 	</bean>
-	<bean id="EntityManagerFactory"
+	<context:component-scan base-package="fr.adaming.forum" />
+
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitManager" ref="PersistenceUnitManager"></property>
-		<property name="persistenceUnitName" value="UP_GestionDesComptes"></property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="fr.adaming.forum.entity" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/forumdb" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="EntityManagerFactory"></property>
-	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager"  />
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+		</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	<context:annotation-config></context:annotation-config>
 
 </beans>
