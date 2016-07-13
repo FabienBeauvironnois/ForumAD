@@ -2,6 +2,7 @@ package fr.adaming.forum.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +12,15 @@ import fr.adaming.forum.entity.Skill;
 @Transactional
 public class SkillServiceImpl implements ISkillService{
 
+	Logger log = Logger.getLogger("SkillServiceImpl");
+	
 	@Autowired
 	private ISkillDao skillDao;
+	
+	public void setSkillDao(ISkillDao skillDao) {
+		this.skillDao = skillDao;
+		log.info("<---dao Skill injected------>");
+	}
 	
 	@Override
 	public Skill addSkill(Skill skill) {

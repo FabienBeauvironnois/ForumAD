@@ -2,6 +2,7 @@ package fr.adaming.forum.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +12,15 @@ import fr.adaming.forum.entity.Topic;
 @Transactional
 public class TopicServiceImpl implements ITopicService{
 
+	Logger log = Logger.getLogger("TopicServiceImpl");
+	
 	@Autowired
 	private ITopicDao topicDao;
+	
+	public void setTopicDao(ITopicDao topicDao) {
+		this.topicDao = topicDao;
+		log.info("<---dao Topic injected------>");
+	}
 	
 	@Override
 	public Topic addTopic(Topic topic) {

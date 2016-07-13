@@ -2,6 +2,7 @@ package fr.adaming.forum.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +12,15 @@ import fr.adaming.forum.entity.User;
 @Transactional
 public class UserServiceImpl implements IUserService{
 
+	Logger log = Logger.getLogger("UserServiceImpl");
+	
 	@Autowired
 	private IUserDao userDao;
+	
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+		log.info("<---dao User injected------>");
+	}
 	
 	@Override
 	public User addUser(User user) {

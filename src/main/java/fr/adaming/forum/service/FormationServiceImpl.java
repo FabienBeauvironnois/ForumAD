@@ -2,17 +2,25 @@ package fr.adaming.forum.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.adaming.forum.dao.IFormation;
+import fr.adaming.forum.dao.IFormationDao;
 import fr.adaming.forum.entity.Formation;
 
 @Transactional
 public class FormationServiceImpl implements IFormationService{
 
+	Logger log = Logger.getLogger("FormationServiceImpl");
+	
 	@Autowired
-	private IFormation formationDao;
+	private IFormationDao formationDao;
+	
+	public void setFormationDao(IFormationDao formationDao) {
+		this.formationDao = formationDao;
+		log.info("<---dao Formation injected------>");
+	}
 	
 	@Override
 	public Formation addFormation(Formation formation) {

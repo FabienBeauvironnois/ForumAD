@@ -1,5 +1,7 @@
 package fr.adaming.forum.service;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +11,15 @@ import fr.adaming.forum.entity.Address;
 @Transactional
 public class AddressServiceImpl implements IAddressService{
 
+	Logger log = Logger.getLogger("AddressServiceImpl");
+	
 	@Autowired
 	private IAddressDao addressDao;
+	
+	public void setAddressDao(IAddressDao addressDao) {
+		this.addressDao = addressDao;
+		log.info("<---dao Address injected------>");
+	}
 	
 	@Override
 	public Address addAdresse(Address address) {

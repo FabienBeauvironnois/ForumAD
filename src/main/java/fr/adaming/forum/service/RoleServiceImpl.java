@@ -2,6 +2,7 @@ package fr.adaming.forum.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +12,15 @@ import fr.adaming.forum.entity.Role;
 @Transactional
 public class RoleServiceImpl implements IRoleService{
 
+	Logger log = Logger.getLogger("RoleServiceImpl");
+	
 	@Autowired
 	private IRoleDao roleDao;
+	
+	public void setRoleDao(IRoleDao roleDao) {
+		this.roleDao = roleDao;
+		log.info("<---dao Role injected------>");
+	}
 	
 	@Override
 	public Role addRole(Role role) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import fr.adaming.forum.entity.Formation;
 
-public interface IFormation {
+public interface IFormationDao {
 
 	public Formation addFormation(Formation formation);
 	public Formation getFormationById(int idFormation);

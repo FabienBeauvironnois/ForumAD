@@ -1,6 +1,7 @@
 package fr.adaming.forum.service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +11,16 @@ import fr.adaming.forum.entity.Comment;
 
 @Transactional
 public class CommentServiceImpl implements ICommentService {
+	
+	Logger log = Logger.getLogger("CommentServiceImpl");
 
 	@Autowired
 	private ICommentDao commentDao;
+	
+	public void setCommentDao(ICommentDao commentDao) {
+		this.commentDao = commentDao;
+		log.info("<---dao Comment injected------>");
+	}
 	
 	@Override
 	public Comment addComment(Comment comment) {

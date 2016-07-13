@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import fr.adaming.forum.entity.Formation;
 
 @Component
-public class FormationDaoImpl implements IFormation{
+public class FormationDaoImpl implements IFormationDao{
 
 	@PersistenceContext
 	private EntityManager em;
