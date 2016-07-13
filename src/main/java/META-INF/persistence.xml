@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="ForumAnciens">
+	
+	<class>fr.adaming.forum.entity.User</class>
+	<class>fr.adaming.forum.entity.Address</class>
+	<class>fr.adaming.forum.entity.Company</class>
+	<class>fr.adaming.forum.entity.Role</class>
+	<class>fr.adaming.forum.entity.Formation</class>
+	<class>fr.adaming.forum.entity.Skill</class>
+	<class>fr.adaming.forum.entity.Comment</class>
+	<class>fr.adaming.forum.entity.Topic</class>
+	
+
+<properties>
+<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/forumdb"/>
+<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+<property name="hibernate.connection.usernale" value="root"/>
+<property name="hibernate.connection.password" value=""/>
+
+<property name="hibernate.show_sql" value="true"/>
+<property name="hibernate.format_sql" value="true"/>
+</properties>	
+	</persistence-unit>
+</persistence>
