@@ -63,4 +63,13 @@ public class TopicDaoImpl implements ITopicDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public Topic getTopicById(Long idTopic) {
+		
+		Topic topic = em.find(Topic.class, idTopic);
+		log.info("Le topic " + topic.getIdTopic() +" à bien été trouvé !");
+		
+		return topic;
+	}
+
 }

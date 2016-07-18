@@ -18,9 +18,6 @@ public class Comment {
 	private Long idComment;
 	
 	@NotNull
-	private String title;
-	
-	@NotNull
 	private String corpus;
 	
 	@ManyToOne
@@ -29,14 +26,19 @@ public class Comment {
 	
 	@NotNull
 	private LocalDateTime date;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="idUser")
+	private User user;
 
 	
 	
-	public Comment(String title, String corpus, Topic topic) {
+	public Comment(String corpus, Topic topic, User user) {
 		super();
-		this.title = title;
 		this.corpus = corpus;
 		this.topic = topic;
+		this.user = user;
 		this.date = LocalDateTime.now();
 	}
 	
@@ -47,13 +49,19 @@ public class Comment {
 	}
 	
 
-	public String getTitle() {
-		return title;
+	
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+
 
 	public String getCorpus() {
 		return corpus;

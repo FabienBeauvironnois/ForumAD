@@ -22,7 +22,7 @@ public class CommentDaoImpl implements ICommentDao {
 	@Override
 	public Comment addComment(Comment comment) {
 		em.persist(comment);
-		log.info("Le commentaire " + comment.getTitle() + " a bien été ajouté!");
+		log.info("Le commentaire " + comment.getIdComment() + " a bien été ajouté!");
 		return comment;
 	}
 
@@ -39,7 +39,7 @@ public class CommentDaoImpl implements ICommentDao {
 	@Override
 	public Comment updateComment(Comment comment) {
 		em.merge(comment);
-		log.info("Le commentaire " + comment.getTitle() + " a bien été mis à jour!");
+		log.info("Le commentaire " + comment.getIdComment() + " a bien été mis à jour!");
 		return comment;
 	}
 
@@ -47,7 +47,7 @@ public class CommentDaoImpl implements ICommentDao {
 	public Comment deleteComment(Long idComment) {
 		Comment comment = em.find(Comment.class,idComment);
 		em.remove(idComment);
-		log.info("Le commentaire " + comment.getTitle() + " a bien été supprimé!" );
+		log.info("Le commentaire " + comment.getIdComment() + " a bien été supprimé!" );
 		return comment;
 	}
 

@@ -47,4 +47,9 @@ public class TopicServiceImpl implements ITopicService{
 		return topicDao.getTopicByKeyWord(keyWord);
 	}
 
+	@Override
+	public Topic getTopicById(Long idTopic) {
+		return topicDao.getTopicById(idTopic);
+	}
+
 }

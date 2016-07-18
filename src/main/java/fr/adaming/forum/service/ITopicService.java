@@ -12,5 +12,6 @@ public interface ITopicService {
 	
 	public List<Topic> getAllTopic();
 	public List<Topic> getTopicByKeyWord(String keyWord);
+	public Topic getTopicById(Long idTopic);
 
 }
