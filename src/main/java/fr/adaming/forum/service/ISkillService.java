@@ -10,4 +10,5 @@ public interface ISkillService {
 	public Skill updateSkill(Skill skill);
 	public Skill deleteSkill(Long idSkill);
 	public List<Skill> getAllSkills ();
+	public Skill getSkillById(Long idSkill);
 }

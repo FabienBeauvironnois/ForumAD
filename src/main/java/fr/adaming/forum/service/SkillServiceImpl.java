@@ -49,4 +49,9 @@ public class SkillServiceImpl implements ISkillService{
 		return skillDao.getAllSkills();
 	}
 
+	@Override
+	public Skill getSkillById(Long idSkill) {
+		return skillDao.getSkillById(idSkill);
+	}
+
 }

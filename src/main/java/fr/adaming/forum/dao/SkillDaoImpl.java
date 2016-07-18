@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
+import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Skill;
 
 @Component
@@ -29,9 +30,9 @@ public class SkillDaoImpl implements ISkillDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Skill> getSkillByKeyWord(String keyWord) {
-		Query query = em.createQuery("FROM Skill s like :x");
+		Query query = em.createQuery("FROM Skill s where s.skillName like :x OR s.skillLevel like :x");
 		query.setParameter("x", "%" + keyWord + "%");
-		log.info("Il y a " + query.getResultList() + " qui inclue(nt) le mot clé " +keyWord );
+		log.info("Il y a " + query.getResultList().size() + " compétences qui inclue(nt) le mot clé " +keyWord );
 		return query.getResultList();
 	}
 
@@ -54,7 +55,15 @@ public class SkillDaoImpl implements ISkillDao{
 	@Override
 	public List<Skill> getAllSkills() {
 		Query query = em.createQuery("FROM Skill");
+		log.info("Il y a "+ query.getResultList().size()+"compétences");
 		return query.getResultList();
+	}
+	
+	@Override
+	public Skill getSkillById(Long idSkill) {
+		Skill skill = em.find(Skill.class, idSkill);
+		log.info("La compétence "+ skill.getSkillName() +" est dans la base de donnée" );
+		return skill;
 	}
 
 }
