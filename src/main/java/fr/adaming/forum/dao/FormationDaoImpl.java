@@ -23,7 +23,7 @@ public class FormationDaoImpl implements IFormationDao{
 	public Formation addFormation(Formation formation) {
 		em.persist(formation);
 		log.info("La formation "+ formation + " a été ajoutée.");
-		return null;
+		return formation;
 	}
 
 	@Override
@@ -60,10 +60,10 @@ public class FormationDaoImpl implements IFormationDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Formation> getFormationByKeyWord(String keyWord) {
-		Query query = em.createQuery("From Formation f like :x");
+		Query query = em.createQuery("FROM Formation f WHERE f.formationName LIKE :x OR f.city LIKE :x");
 		query.setParameter("x", "%" + keyWord + "%");
 		
-		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
+		log.info(query.getResultList().size() + " utilisateur(s) ont été trouvé !");
 		return query.getResultList();
 	}
 

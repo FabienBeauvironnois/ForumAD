@@ -10,4 +10,5 @@ public interface IRoleService {
 	public Role deleteRole(Long idRole);
 	
 	public List<Role> getAllRole();
+	public Role getRoleById(Long idRole);
 }

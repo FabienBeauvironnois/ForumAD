@@ -3,6 +3,7 @@ package fr.adaming.forum.test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -28,26 +29,75 @@ public class FormationServiceTest {
 		context.close();
 	}
 
-	/*@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddFormation() {
 		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
-		service.addFormation(formation);
 		
-		assertNotNull(formation.getIdFormation());
-	}*/
+		/*
+		int beforeSize = service.getAllFormations().size();
+		Formation createdFormation = service.addFormation(formation);
+		int afterSize = service.getAllFormations().size();
+		System.out.println("formation créée : " + createdFormation);
+		assertTrue( afterSize > beforeSize );
+		*/
+		
+		assertNotNull(service.addFormation(formation));
+		
+	}
 	
+	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetFormationById() {
-		Formation formation = service.getFormationById(2L);
+		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		Long id = service.addFormation(formation).getIdFormation();
+		formation = service.getFormationById(id);
 		
 		assertNotNull(formation);
 	}
 	
-	/*@Test
+	@SuppressWarnings("deprecation")
+	@Test
 	public void testDeleteFormation() {
-		Formation formation = service.deleteFormation(1L);
+		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		Long id = service.addFormation(formation).getIdFormation();
+		
+		formation = service.deleteFormation(id);
 		assertNotNull(formation);
-	}*/
+	}
 
+
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testUpdateFormation(){
+		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		
+		Formation form1  = service.addFormation(formation);
+		formation.setCity("Paris");
+		Formation form2 = service.updateFormation(formation);
+		
+		assertTrue( form1.equals(form2) );
+		
+	}
+	
+	@Test
+	public void  testGetAllFormations(){
+		List<Formation> formList = service.getAllFormations();
+		
+		assertFalse( "Nombre de formations trouvées : " + formList.size(), formList.isEmpty() );
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testGetFormationByKeyWord(){
+		Formation formation = new Formation("C++", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		service.addFormation(formation);
+		
+		List<Formation> formList = service.getFormationByKeyWord("C++");
+		
+		assertFalse(formList.isEmpty());
+		
+	}
+	
 }
