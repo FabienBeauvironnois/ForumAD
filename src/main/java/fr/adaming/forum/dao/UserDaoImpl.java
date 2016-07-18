@@ -64,7 +64,7 @@ public class UserDaoImpl implements IUserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {
-		Query query = em.createQuery("From User u like :x");
+		Query query = em.createQuery("FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x"); //OR u.formation.name LIKE :x
 		query.setParameter("x", "%" + keyWord + "%");
 		
 		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");

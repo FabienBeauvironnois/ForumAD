@@ -45,18 +45,20 @@ public class User {
 	private String email;
 	
 	@NotNull
+//	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
 	@Pattern.List({
-	    @Pattern(regexp = "(?=.*[0-9])", message = "Password must contain one digit."),
-	    @Pattern(regexp = "(?=.*[a-z])", message = "Password must contain one lowercase letter."),
-	    @Pattern(regexp = "(?=.*[A-Z])", message = "Password must contain one uppercase letter."),
-	    @Pattern(regexp = "(?=\\S+$)", message = "Password must contain no whitespace.")
+	    @Pattern(regexp = "^(?=.*[0-9]).{0,}$", message = "Password must contain at least one digit."),
+	    @Pattern(regexp = "^(?=.*[a-z]).{0,}$", message = "Password must contain at least one lowercase letter."),
+	    @Pattern(regexp = "^(?=.*[A-Z]).{0,}$", message = "Password must contain at least one uppercase letter."),
+	    @Pattern(regexp = "^(?=\\S+$).{0,}$", message = "Password must contain no whitespace."), 
+	    @Pattern(regexp= "^.{3,14}$", message = "Password must contain from 4 to 15 characters ")
 	})
 	private String password;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idFormation")
-	private Formation formation;
+	private Formation formation; 
 
 	public User(String firstName, String name, Address personalAddress, Company company, Role role, String email,
 			String password, Formation formation) {
@@ -69,6 +71,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.formation = formation;
+	
 	}
 
 	public User() {
