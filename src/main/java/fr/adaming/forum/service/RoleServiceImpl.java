@@ -42,4 +42,9 @@ public class RoleServiceImpl implements IRoleService{
 		return roleDao.getAllRole();
 	}
 
+	@Override
+	public Role getRoleById(Long idRole) {
+		return roleDao.getRoleById(idRole);
+	}
+
 }

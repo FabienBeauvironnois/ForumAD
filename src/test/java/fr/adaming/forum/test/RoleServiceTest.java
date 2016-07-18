@@ -1,5 +1,6 @@
 package fr.adaming.forum.test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
@@ -41,13 +42,13 @@ public class RoleServiceTest {
 		
 		List<Role> listRoles = service.getAllRole();
 		int sizeBefore = listRoles.size();
-		Role role = service.deleteRole(3L);
+		Role role = service.deleteRole(1L); // Attention le changer à chaque fois pour éviter que le test ne passe pas quand on est en update.
 		List<Role> listRolesAfter = service.getAllRole();
 		int sizeAfter = listRolesAfter.size();
 		
 		assertNotNull(role);
 		assert(sizeBefore > sizeAfter);
-		
+
 	}
 	
 	@Test 
@@ -55,6 +56,17 @@ public class RoleServiceTest {
 		List<Role> role = service.getAllRole();
 		assertNotNull(role);
 	}
+	
+	 @Test
+	 public void testUpdateRole(){
+		 Role role = service.getRoleById(10L);
+		 Role updatedRole = service.getRoleById(10L);
+		 updatedRole.setStatus("Master");
+		 service.updateRole(updatedRole);
+		 
+		 assertFalse(role.equals(updatedRole));
+		 
+	 }
 	
 
 }
