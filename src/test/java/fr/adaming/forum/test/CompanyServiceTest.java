@@ -83,7 +83,11 @@ public class CompanyServiceTest {
 	
 	@Test
 	public void testGetCompanyByMc() {
-		List<Company> companyList = companyService.getCompanyByMc("up");
+		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
+		address = addressService.addAdresse(address);
+		companyService.addCompany(new Company("SII", "", address));
+		
+		List<Company> companyList = companyService.getCompanyByMc("SII");
 		
 		assertNotNull(companyList);
 	}

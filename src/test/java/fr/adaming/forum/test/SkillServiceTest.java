@@ -1,8 +1,6 @@
 package fr.adaming.forum.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -41,23 +39,28 @@ public class SkillServiceTest {
 
 	@Test
 	public void testDeleteSkill(){
+		Skill skill = new Skill("JavaEE", SkillLevel.three);
+		skill = service.addSkill(skill);
 		
-		List<Skill> listSkills = service.getAllSkills();
-		int sizeBefore = listSkills.size();
-		Skill skill = service.deleteSkill(3L);
-		List<Skill> listSkillsafter = service.getAllSkills();
-		int sizeAfter = listSkillsafter.size();
+		int sizeBefore = service.getAllSkills().size();
+		skill = service.deleteSkill(skill.getIdSkill());
+		int sizeAfter = service.getAllSkills().size();
+		
 		assertNotNull(skill);
-		assert(sizeBefore > sizeAfter);
+		assertTrue( service.getSkillById(skill.getIdSkill()) == null );
+		assert(sizeBefore == sizeAfter+1);
 	}
 		
 	
 	@Test
 	public void testGetSkillById(){
-		Skill skill = service.getSkillById(2L);
+		Skill skill = new Skill("JavaEE", SkillLevel.three);
+		service.addSkill(skill);
+		skill = service.getSkillById(skill.getIdSkill());
 		
 		assertNotNull(skill);
 	}
+	
 	@Test
 	public void testGetAllSkills(){
 		List<Skill> skill = service.getAllSkills();
@@ -66,21 +69,23 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testGetSkillByKeyword(){
+		Skill skill = new Skill("Python", SkillLevel.three);
+		service.addSkill(skill);
+		List<Skill> skillform = service.getSkillByKeyWord("Python");
 		
-		List<Skill> skillform = service.getSkillByKeyWord("Java");
 		assertFalse(skillform.isEmpty());
 	}
 	
 	@Test
 	public void testUpdateSkill(){
 		Skill skill = new Skill("C++",SkillLevel.four);	
+		skill = service.addSkill(skill);	
 		
-		skill = service.addSkill(skill);		
-		Skill s = service.updateSkill(skill);
+		Skill s = service.getSkillById(skill.getIdSkill());
 		s.setSkillName("toto");
 		s = service.updateSkill(s);
 		
-		assertTrue( s.equals(skill));
+		assertFalse( s.equals(skill) );
 	}
 
 }

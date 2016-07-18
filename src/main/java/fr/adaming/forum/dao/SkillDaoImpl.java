@@ -62,7 +62,11 @@ public class SkillDaoImpl implements ISkillDao{
 	@Override
 	public Skill getSkillById(Long idSkill) {
 		Skill skill = em.find(Skill.class, idSkill);
-		log.info("La compétence "+ skill.getSkillName() +" est dans la base de donnée" );
+		if(skill != null){
+			log.info("La compétence "+ skill.getSkillName() +" est dans la base de donnée" );
+		}else{
+			log.info("La compétence "+ idSkill +" n'est pas dans la base de donnée" );
+		}
 		return skill;
 	}
 

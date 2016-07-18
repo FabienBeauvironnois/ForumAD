@@ -56,7 +56,7 @@ public class AddressServiceTest {
 		assertFalse(addressUpdate.equals(address));
 	}
 	
-	/*@Test
+	@Test
 	public void testDeleteAddress() {
 		
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
@@ -68,6 +68,6 @@ public class AddressServiceTest {
 		assertTrue( service.getAdresseById(idAddress) == null );
 		
 		
-	}*/
+	}
 
 }

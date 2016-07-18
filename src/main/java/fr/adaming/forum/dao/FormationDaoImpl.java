@@ -36,7 +36,7 @@ public class FormationDaoImpl implements IFormationDao{
 	@Override
 	public Formation updateFormation(Formation formation) {
 		em.merge(formation);
-		log.info("L'adresse "+ formation +" a été modifiée");
+		log.info("La formation "+ formation +" a été modifiée");
 		return formation;
 		
 	}
@@ -45,7 +45,7 @@ public class FormationDaoImpl implements IFormationDao{
 	public Formation deleteFormation(Long idFormation) {
 		Formation formation = em.find(Formation.class, idFormation);
 		em.remove(formation);
-		log.info("L'adresse "+ formation +" a été supprimée de la base de donnée" );
+		log.info("La formation "+ formation +" a été supprimée de la base de donnée" );
 		return formation;
 	}
 
@@ -63,7 +63,7 @@ public class FormationDaoImpl implements IFormationDao{
 		Query query = em.createQuery("FROM Formation f WHERE f.formationName LIKE :x OR f.city LIKE :x");
 		query.setParameter("x", "%" + keyWord + "%");
 		
-		log.info(query.getResultList().size() + " utilisateur(s) ont été trouvé !");
+		log.info(query.getResultList().size() + " formations ont été trouvé !");
 		return query.getResultList();
 	}
 

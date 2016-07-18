@@ -78,10 +78,10 @@ public class UserServiceTest {
 	
 	 @Test
 	 public void testUpdateUser(){
-		 User user = service.getUserById(2L);
-		 User updatedUser = service.getUserById(2L);
+		 User user = service.addUser(this.createDefaultUser());
+		 User updatedUser = service.getUserById(user.getIdUser());
 		 updatedUser.setFirstName("HULK");
-		 service.updateUser(updatedUser);
+		 updatedUser = service.updateUser(updatedUser);
 		 
 		 assertFalse(user.equals(updatedUser));
 		 
@@ -92,4 +92,17 @@ public class UserServiceTest {
 		 List<User> user = service.getUserByKeyWord("BOSS");
 		 System.out.println(user);
 	 }
+	 
+	 private User createDefaultUser(){
+		Role role = new Role("Admin");
+		serviceRole.addRole(role);
+		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
+		serviceFormation.addFormation(formation);
+		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
+		serviceAddress.addAdresse(address);
+		Company company = new Company("adaming", "Toulouse", address);
+		serviceCompany.addCompany(company);
+		return new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
+	 }
+		
 }

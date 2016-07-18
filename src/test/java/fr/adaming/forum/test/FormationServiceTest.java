@@ -71,13 +71,17 @@ public class FormationServiceTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateFormation(){
-		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		Formation formation = new Formation(".NET", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		formation = service.addFormation(formation);
 		
-		Formation form1  = service.addFormation(formation);
+		Formation oldForm  = service.getFormationById(formation.getIdFormation());
 		formation.setCity("Paris");
-		Formation form2 = service.updateFormation(formation);
+		Formation newForm = service.updateFormation(formation);
 		
-		assertTrue( form1.equals(form2) );
+		System.out.println(oldForm.getCity());
+		System.out.println(newForm.getCity());
+		
+		assertFalse( newForm.equals(oldForm) );
 		
 	}
 	
@@ -91,12 +95,13 @@ public class FormationServiceTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetFormationByKeyWord(){
-		Formation formation = new Formation("C++", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		Formation formation = new Formation("C++", "Bordeaux", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
 		service.addFormation(formation);
 		
-		List<Formation> formList = service.getFormationByKeyWord("C++");
+		List<Formation> formList1 = service.getFormationByKeyWord("C++");
+		List<Formation> formList2 = service.getFormationByKeyWord("Bordeaux");
 		
-		assertFalse(formList.isEmpty());
+		assertFalse( formList1.isEmpty() || formList2.isEmpty() );
 		
 	}
 	
