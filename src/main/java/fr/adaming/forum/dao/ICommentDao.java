@@ -9,7 +9,7 @@ public interface ICommentDao {
 	public Comment addComment(Comment comment);
 	public List<Comment> getCommentByKeyWord(String keyWord);
 	public Comment updateComment(Comment comment);
-	public Comment deleteComment(int idComment);
+	public Comment deleteComment(Long idComment);
 	public List<Comment> getAllComments ();
 
 }

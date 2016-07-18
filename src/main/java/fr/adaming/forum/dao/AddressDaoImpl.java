@@ -24,7 +24,7 @@ public class AddressDaoImpl implements IAddressDao {
 	}
 
 	@Override
-	public Address getAdresseById(int idAddress) {
+	public Address getAdresseById(Long idAddress) {
 		Address a = em.find(Address.class, idAddress);
 		log.info("L'adresse "+a+" est dans la base de donnée" );
 		return a;
@@ -38,7 +38,7 @@ public class AddressDaoImpl implements IAddressDao {
 	}
 
 	@Override
-	public Address deleteAdresse(int idAddress) {
+	public Address deleteAdresse(Long idAddress) {
 		Address address = em.find(Address.class, idAddress);
 		em.remove(address);
 		log.info("L'adresse "+ address +" a été supprimée de la base de donnée" );

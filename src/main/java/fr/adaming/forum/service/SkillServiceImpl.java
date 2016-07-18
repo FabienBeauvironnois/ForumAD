@@ -39,7 +39,7 @@ public class SkillServiceImpl implements ISkillService{
 	}
 
 	@Override
-	public Skill deleteSkill(int idSkill) {
+	public Skill deleteSkill(Long idSkill) {
 		
 		return skillDao.deleteSkill(idSkill);
 	}

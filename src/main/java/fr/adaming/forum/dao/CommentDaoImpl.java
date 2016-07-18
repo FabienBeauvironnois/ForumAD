@@ -44,7 +44,7 @@ public class CommentDaoImpl implements ICommentDao {
 	}
 
 	@Override
-	public Comment deleteComment(int idComment) {
+	public Comment deleteComment(Long idComment) {
 		Comment comment = em.find(Comment.class,idComment);
 		em.remove(idComment);
 		log.info("Le commentaire " + comment.getTitle() + " a bien été supprimé!" );

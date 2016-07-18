@@ -9,7 +9,7 @@ public interface ISkillDao {
 	public Skill addSkill(Skill skill);
 	public List<Skill> getSkillByKeyWord(String keyWord);
 	public Skill updateSkill(Skill skill);
-	public Skill deleteSkill(int idSkill);
+	public Skill deleteSkill(Long idSkill);
 	public List<Skill> getAllSkills ();
 
 }

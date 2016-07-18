@@ -28,7 +28,7 @@ public class FormationServiceImpl implements IFormationService{
 	}
 
 	@Override
-	public Formation getFormationById(int idFormation) {
+	public Formation getFormationById(Long idFormation) {
 		return formationDao.getFormationById(idFormation);
 	}
 
@@ -38,7 +38,7 @@ public class FormationServiceImpl implements IFormationService{
 	}
 
 	@Override
-	public Formation deleteFormation(int idFormation) {
+	public Formation deleteFormation(Long idFormation) {
 		return formationDao.deleteFormation(idFormation);
 	}
 

@@ -43,7 +43,7 @@ public class SkillDaoImpl implements ISkillDao{
 	}
 
 	@Override
-	public Skill deleteSkill(int idSkill) {
+	public Skill deleteSkill(Long idSkill) {
 		Skill skill = em.find(Skill.class, idSkill);
 		em.remove(skill);
 		log.info("La compétence " + skill.getSkillName() + " a bien été supprimée!");

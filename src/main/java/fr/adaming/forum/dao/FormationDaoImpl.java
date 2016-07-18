@@ -27,7 +27,7 @@ public class FormationDaoImpl implements IFormationDao{
 	}
 
 	@Override
-	public Formation getFormationById(int idFormation) {
+	public Formation getFormationById(Long idFormation) {
 		Formation formation = em.find(Formation.class, idFormation);
 		log.info("La formation "+ formation +" est dans la base de donnée" );
 		return formation;
@@ -42,7 +42,7 @@ public class FormationDaoImpl implements IFormationDao{
 	}
 
 	@Override
-	public Formation deleteFormation(int idFormation) {
+	public Formation deleteFormation(Long idFormation) {
 		Formation formation = em.find(Formation.class, idFormation);
 		em.remove(formation);
 		log.info("L'adresse "+ formation +" a été supprimée de la base de donnée" );

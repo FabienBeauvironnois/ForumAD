@@ -38,7 +38,7 @@ public class CommentServiceImpl implements ICommentService {
 	}
 
 	@Override
-	public Comment deleteComment(int idComment) {
+	public Comment deleteComment(Long idComment) {
 		return commentDao.deleteComment(idComment);
 	}
 

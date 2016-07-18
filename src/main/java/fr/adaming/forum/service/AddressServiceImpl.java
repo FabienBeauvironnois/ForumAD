@@ -27,7 +27,7 @@ public class AddressServiceImpl implements IAddressService{
 	}
 
 	@Override
-	public Address getAdresseById(int idAddress) {
+	public Address getAdresseById(Long idAddress) {
 		return addressDao.getAdresseById(idAddress);
 	}
 
@@ -37,7 +37,7 @@ public class AddressServiceImpl implements IAddressService{
 	}
 
 	@Override
-	public Address deleteAdresse(int idAddress) {
+	public Address deleteAdresse(Long idAddress) {
 		return addressDao.deleteAdresse(idAddress);
 	}
 
