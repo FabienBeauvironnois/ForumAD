@@ -11,6 +11,7 @@ public interface ICommentService {
 	public Comment updateComment(Comment comment);
 	public Comment deleteComment(Long idComment);
 	public List<Comment> getAllComments ();
+	public Comment getCommentById(Long idComment);
 
 
 }

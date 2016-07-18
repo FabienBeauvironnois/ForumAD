@@ -89,7 +89,7 @@ public class UserServiceTest {
 	 
 	 @Test
 	 public void testGetUserByKeyWord(){
-		 List<User> user = service.getUserByKeyWord("BOSS");
+		 List<User> user = service.getUserByKeyWord("adam");
 		 System.out.println(user);
 	 }
 }

@@ -46,16 +46,24 @@ public class CommentDaoImpl implements ICommentDao {
 	@Override
 	public Comment deleteComment(Long idComment) {
 		Comment comment = em.find(Comment.class,idComment);
-		em.remove(idComment);
+		em.remove(comment);
 		log.info("Le commentaire " + comment.getIdComment() + " a bien été supprimé!" );
+		return comment;
+	}
+	
+	@Override
+	public Comment getCommentById(Long idComment) {
+		Comment comment = em.find(Comment.class, idComment);
 		return comment;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Comment> getAllComments() {
-		Query query = em.createNamedQuery("FROM Comment");
+		Query query = em.createQuery("FROM Comment c");
 		return query.getResultList();
 	}
+
+	
 
 }

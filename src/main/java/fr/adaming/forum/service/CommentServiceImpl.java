@@ -47,4 +47,9 @@ public class CommentServiceImpl implements ICommentService {
 		return commentDao.getAllComments();
 	}
 
+	@Override
+	public Comment getCommentById(Long idComment) {
+		return commentDao.getCommentById(idComment);
+	}
+
 }
