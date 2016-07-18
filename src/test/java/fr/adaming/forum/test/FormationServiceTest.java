@@ -28,26 +28,26 @@ public class FormationServiceTest {
 		context.close();
 	}
 
-	/*@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddFormation() {
 		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
 		service.addFormation(formation);
 		
 		assertNotNull(formation.getIdFormation());
-	}*/
+	}
 	
 	@Test
 	public void testGetFormationById() {
-		Formation formation = service.getFormationById(2L);
+		Formation formation = service.getFormationById(1L);
 		
 		assertNotNull(formation);
 	}
 	
-	/*@Test
+	@Test
 	public void testDeleteFormation() {
 		Formation formation = service.deleteFormation(1L);
 		assertNotNull(formation);
-	}*/
+	}
 
 }
