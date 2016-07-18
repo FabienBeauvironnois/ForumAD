@@ -3,15 +3,11 @@ package fr.adaming.forum.test;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import fr.adaming.forum.entity.Address;
-import fr.adaming.forum.entity.Company;
-import fr.adaming.forum.entity.Skill;
+
 import fr.adaming.forum.entity.Topic;
 import fr.adaming.forum.entity.User;
 import fr.adaming.forum.service.ITopicService;
