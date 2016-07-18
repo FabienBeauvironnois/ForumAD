@@ -11,5 +11,6 @@ public interface IRoleDao {
 	public Role deleteRole(Long idRole);
 	
 	public List<Role> getAllRole();
+	public Role getRoleById(Long idRole);
 
 }
