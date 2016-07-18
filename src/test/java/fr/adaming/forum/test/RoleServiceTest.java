@@ -38,7 +38,15 @@ public class RoleServiceTest {
 	
 	@Test
 	public void testDeleteRole() {
-		service.deleteRole(1L);
+		
+		List<Role> listRoles = service.getAllRole();
+		int sizeBefore = listRoles.size();
+		Role role = service.deleteRole(3L);
+		List<Role> listRolesAfter = service.getAllRole();
+		int sizeAfter = listRolesAfter.size();
+		
+		assertNotNull(role);
+		assert(sizeBefore > sizeAfter);
 		
 	}
 	

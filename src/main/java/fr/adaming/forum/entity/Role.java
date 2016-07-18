@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 
  * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
- * Cette classe défini les différents roles possibles pour les utilisateurs.
+ * Cette classe définit les différents roles possibles pour les utilisateurs.
  * C'est une classe à part pour permettre la modification et création des roles.
  *
  */
@@ -44,7 +44,5 @@ public class Role {
 	public Long getIdRole() {
 		return idRole;
 	}
-	
-	
 
 }
