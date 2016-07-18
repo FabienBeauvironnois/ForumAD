@@ -56,7 +56,7 @@ public class TopicDaoImpl implements ITopicDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Topic> getTopicByKeyWord(String keyWord) {
-		Query query = em.createQuery("From Topic like :x");
+		Query query = em.createQuery("From Topic t Where t.title like :x");
 		query.setParameter("x", "%" + keyWord + "%");
 		
 		log.info(query.getResultList().size() + " topic(s) ont bien été trouvé !");
