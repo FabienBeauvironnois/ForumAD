@@ -31,7 +31,7 @@ public class SkillServiceTest {
 		context.close();
 	}
 
-/*	@Test
+	@Test
 	public void testAddSkill() {
 		Skill skill = new Skill("JavaEE", SkillLevel.three);
 		service.addSkill(skill);
@@ -42,10 +42,15 @@ public class SkillServiceTest {
 	@Test
 	public void testDeleteSkill(){
 		
-		Skill skill = service.deleteSkill(1L);
+		List<Skill> listSkills = service.getAllSkills();
+		int sizeBefore = listSkills.size();
+		Skill skill = service.deleteSkill(3L);
+		List<Skill> listSkillsafter = service.getAllSkills();
+		int sizeAfter = listSkillsafter.size();
 		assertNotNull(skill);
+		assert(sizeBefore > sizeAfter);
 	}
-		*/
+		
 	
 	@Test
 	public void testGetSkillById(){
@@ -66,7 +71,7 @@ public class SkillServiceTest {
 		assertFalse(skillform.isEmpty());
 	}
 	
-/*	@Test
+	@Test
 	public void testUpdateSkill(){
 		Skill skill = new Skill("C++",SkillLevel.four);	
 		
@@ -76,6 +81,6 @@ public class SkillServiceTest {
 		s = service.updateSkill(s);
 		
 		assertTrue( s.equals(skill));
-	}*/
+	}
 
 }
