@@ -23,14 +23,14 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@Override
 	public Company addCompany(Company company) {
 		em.persist(company);
-		log.info("La société"+company.getCompanyName()+ " à été ajouté");
+		log.info("La société "+company.getCompanyName()+ " à été ajouté");
 		return company;
 	}
 
 	@Override
 	public Company updateCompany(Company company) {
 		em.merge(company);
-		log.info("La société" + company.getCompanyName()+ " à été mis à jour");
+		log.info("La société " + company.getCompanyName()+ " à été mis à jour");
 		return company;
 	}
 
@@ -38,14 +38,14 @@ public class CompanyDaoImpl implements ICompanyDao {
 	public Company deleteCompany(Long idCompany) {
 		Company company = em.find(Company.class, idCompany);
 		em.remove(company);
-		log.info("La société" + company.getCompanyName()+ " à été supprimé");
+		log.info("La société " + company.getCompanyName()+ " à été supprimé");
 		return company;
 	}
 
 	@Override
 	public Company getCompanyById(Long idCompany) {
 		Company company = em.find(Company.class, idCompany);
-		log.info("L'utilisateur"+company.getCompanyName()+ " à été trouvé");
+		log.info("La société "+company.getCompanyName()+ " à été trouvé");
 		return company;
 	}
 
@@ -60,9 +60,9 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> getCompanyByMc(String keyword) {
-		Query query = em.createQuery("From Company c like :x");
+		Query query = em.createQuery("From Company c Where c.companyName like :x");
 		query.setParameter("x", "%" +keyword+"%");
-		log.info(query.getResultList().size()+"société ont été trouvé");
+		log.info(query.getResultList().size()+" société ont été trouvé");
 		return query.getResultList();
 	}
 

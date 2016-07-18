@@ -2,6 +2,8 @@ package fr.adaming.forum.test;
 
 import static org.junit.Assert.*;
 
+
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,10 +31,43 @@ public class AddressServiceTest {
 	@Test
 	public void testAddAddress() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		service.addAdresse(address);
+		address = service.addAdresse(address);
 		
 		assertNotNull(address.getIdAddress());
 		
 	}
+	
+	@Test
+	public void testGetAddressById() {
+		Address address = service.getAdresseById(1L);
+		
+		assertNotNull(address);
+		
+	}
+	
+	@Test
+	public void testUpdateAddress() {
+		Address address = service.getAdresseById(1L);
+		Address addressUpdate = service.getAdresseById(1L);
+		addressUpdate.setCity("Update2");
+		addressUpdate = service.updateAdresse(addressUpdate);
+		
+		
+		assertFalse(addressUpdate.equals(address));
+	}
+	
+	/*@Test
+	public void testDeleteAddress() {
+		
+		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
+		address = service.addAdresse(address);
+		
+		Long idAddress = service.deleteAdresse(address.getIdAddress()).getIdAddress();
+		
+				
+		assertTrue( service.getAdresseById(idAddress) == null );
+		
+		
+	}*/
 
 }
