@@ -9,7 +9,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
-import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Skill;
 
 @Component
