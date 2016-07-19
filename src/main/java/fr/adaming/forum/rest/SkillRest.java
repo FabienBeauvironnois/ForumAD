@@ -24,7 +24,7 @@ public class SkillRest {
 	@Autowired
 	private ISkillService skillservice;
 	
-	@RequestMapping(value="/getSkill",method=RequestMethod.GET)
+	@RequestMapping(value="/getAllSkills",method=RequestMethod.GET)
 	public List<Skill> getAllSkills(){
 		return skillservice.getAllSkills();
 	}

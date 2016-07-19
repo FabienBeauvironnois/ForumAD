@@ -57,7 +57,7 @@ public class CommentRest {
 		return service.deleteComment(idComment);
 	}
 	
-	@RequestMapping(value="/updateComment", method=RequestMethod.POST)
+	@RequestMapping(value="/updateComment", method=RequestMethod.PUT)
 	public Comment updateComment(@RequestBody Comment comment){
 		return service.updateComment(comment);
 	}

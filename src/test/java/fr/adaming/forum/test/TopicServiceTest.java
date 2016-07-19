@@ -34,9 +34,9 @@ public class TopicServiceTest {
 	
 	@Test
 	public void testAddTopic(){
-		User user = userService.getUserById(1L);
+		User user = userService.getAllUser().get(0);
 		//user = userService.addUser(user);
-		Topic topic = new Topic("test2", user);
+		Topic topic = new Topic("test", user);
 		topic = topicService.addTopic(topic);
 		
 		assertNotNull(topic);

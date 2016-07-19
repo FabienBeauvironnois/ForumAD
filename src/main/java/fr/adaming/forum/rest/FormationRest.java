@@ -58,7 +58,7 @@ public class FormationRest {
 		return service.deleteFormation(idFormation);
 	}
 
-	@RequestMapping(value = "/updateFormation", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateFormation", method = RequestMethod.PUT)
 	public Formation updateFormation(@RequestBody Formation user) {
 		return service.updateFormation(user);
 	}

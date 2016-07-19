@@ -52,7 +52,7 @@ public class RoleRest {
 		return service.deleteRole(idRole);
 	}
 	
-	@RequestMapping(value="/updateRole", method=RequestMethod.POST)
+	@RequestMapping(value="/updateRole", method=RequestMethod.PUT)
 	public Role updateRole(@RequestBody Role role){
 		return service.updateRole(role);
 	}
