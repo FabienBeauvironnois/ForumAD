@@ -48,7 +48,7 @@ public class AddressRest {
 		return service.deleteAddress(idAddress);
 	}
 	
-	@RequestMapping(value="/updateAddress", method=RequestMethod.POST)
+	@RequestMapping(value="/updateAddress", method=RequestMethod.PUT)
 	public Address updateAddress(@RequestBody Address user){
 		return service.updateAddress(user);
 	}
