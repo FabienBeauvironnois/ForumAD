@@ -35,7 +35,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testAddCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAdresse(address);
+		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
 		company = companyService.addCompany(company);
@@ -47,7 +47,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testGetCompanyById() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAdresse(address);
+		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
 		company = companyService.addCompany(company);
@@ -60,7 +60,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testUpdateCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAdresse(address);
+		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
 		company = companyService.addCompany(company);
@@ -84,7 +84,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testGetCompanyByMc() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAdresse(address);
+		address = addressService.addAddress(address);
 		companyService.addCompany(new Company("SII", "", address));
 		
 		List<Company> companyList = companyService.getCompanyByMc("SII");
@@ -95,7 +95,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testDeleteCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAdresse(address);
+		address = addressService.addAddress(address);
 		Company company = companyService.addCompany(new Company("SII", "", address));
 		
 		List<Company> listBefore = companyService.getAllCompany();

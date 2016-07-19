@@ -4,9 +4,9 @@ import fr.adaming.forum.entity.Address;
 
 public interface IAddressService {
 	
-	public Address addAdresse(Address address);
-	public Address getAdresseById(Long idAddress);
-	public Address updateAdresse(Address address);
-	public Address deleteAdresse(Long idAddress);
+	public Address addAddress(Address address);
+	public Address getAddressById(Long idAddress);
+	public Address updateAddress(Address address);
+	public Address deleteAddress(Long idAddress);
 
 }

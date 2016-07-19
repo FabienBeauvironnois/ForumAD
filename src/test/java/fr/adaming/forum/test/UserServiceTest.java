@@ -53,7 +53,7 @@ public class UserServiceTest {
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
 		serviceFormation.addFormation(formation);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		serviceAddress.addAdresse(address);
+		serviceAddress.addAddress(address);
 		Company company = new Company("adaming", "Toulouse", address);
 		serviceCompany.addCompany(company);
 		User user = new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
@@ -99,7 +99,7 @@ public class UserServiceTest {
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
 		serviceFormation.addFormation(formation);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		serviceAddress.addAdresse(address);
+		serviceAddress.addAddress(address);
 		Company company = new Company("adaming", "Toulouse", address);
 		serviceCompany.addCompany(company);
 		return new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);

@@ -22,23 +22,23 @@ public class AddressServiceImpl implements IAddressService{
 	}
 	
 	@Override
-	public Address addAdresse(Address address) {
-		return addressDao.addAdresse(address);
+	public Address addAddress(Address address) {
+		return addressDao.addAddress(address);
 	}
 
 	@Override
-	public Address getAdresseById(Long idAddress) {
-		return addressDao.getAdresseById(idAddress);
+	public Address getAddressById(Long idAddress) {
+		return addressDao.getAddressById(idAddress);
 	}
 
 	@Override
-	public Address updateAdresse(Address address) {
-		return addressDao.updateAdresse(address);
+	public Address updateAddress(Address address) {
+		return addressDao.updateAddress(address);
 	}
 
 	@Override
-	public Address deleteAdresse(Long idAddress) {
-		return addressDao.deleteAdresse(idAddress);
+	public Address deleteAddress(Long idAddress) {
+		return addressDao.deleteAddress(idAddress);
 	}
 
 }

@@ -17,14 +17,14 @@ public class AddressDaoImpl implements IAddressDao {
 	private EntityManager em;
 
 	@Override
-	public Address addAdresse(Address address) {
+	public Address addAddress(Address address) {
 		em.persist(address);
 		log.info("L'adresse "+ address + " a été ajouté.");
 		return address;
 	}
 
 	@Override
-	public Address getAdresseById(Long idAddress) {
+	public Address getAddressById(Long idAddress) {
 		Address a = em.find(Address.class, idAddress);
 		if(a != null){
 			log.info("L'adresse "+a+" est dans la base de donnée" );
@@ -35,14 +35,14 @@ public class AddressDaoImpl implements IAddressDao {
 	}
 
 	@Override
-	public Address updateAdresse(Address address) {
+	public Address updateAddress(Address address) {
 		em.merge(address);
 		log.info("L'adresse "+ address +" a été modifiée");
 		return address;
 	}
 
 	@Override
-	public Address deleteAdresse(Long idAddress) {
+	public Address deleteAddress(Long idAddress) {
 		Address address = em.find(Address.class, idAddress);
 		em.remove(address);
 		log.info("L'adresse "+ address +" a été supprimée de la base de donnée" );
