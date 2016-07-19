@@ -31,7 +31,7 @@ public class AddressServiceTest {
 	@Test
 	public void testAddAddress() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = service.addAdresse(address);
+		address = service.addAddress(address);
 		
 		assertNotNull(address.getIdAddress());
 		
@@ -39,7 +39,7 @@ public class AddressServiceTest {
 	
 	@Test
 	public void testGetAddressById() {
-		Address address = service.getAdresseById(1L);
+		Address address = service.getAddressById(1L);
 		
 		assertNotNull(address);
 		
@@ -47,10 +47,10 @@ public class AddressServiceTest {
 	
 	@Test
 	public void testUpdateAddress() {
-		Address address = service.getAdresseById(1L);
-		Address addressUpdate = service.getAdresseById(1L);
+		Address address = service.getAddressById(1L);
+		Address addressUpdate = service.getAddressById(1L);
 		addressUpdate.setCity("Update2");
-		addressUpdate = service.updateAdresse(addressUpdate);
+		addressUpdate = service.updateAddress(addressUpdate);
 		
 		
 		assertFalse(addressUpdate.equals(address));
@@ -60,12 +60,12 @@ public class AddressServiceTest {
 	public void testDeleteAddress() {
 		
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = service.addAdresse(address);
+		address = service.addAddress(address);
 		
-		Long idAddress = service.deleteAdresse(address.getIdAddress()).getIdAddress();
+		Long idAddress = service.deleteAddress(address.getIdAddress()).getIdAddress();
 		
 				
-		assertTrue( service.getAdresseById(idAddress) == null );
+		assertTrue( service.getAddressById(idAddress) == null );
 		
 		
 	}
