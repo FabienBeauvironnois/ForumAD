@@ -39,7 +39,7 @@ public class CommentServiceTest {
 	
 	@Test
 	public void testAddComment() {
-		User user = serviceUser.getUserById(1L);
+		User user = serviceUser.getAllUser().get(0);
 		Topic topic = new Topic("Topic Title", user);
 		serviceTopic.addTopic(topic);
 		Comment comment = new Comment("Ceci est un commentaire", topic, user);
@@ -49,7 +49,8 @@ public class CommentServiceTest {
 	
 	@Test
 	public void testUpdateComment(){
-		Comment com = service.getCommentById(1L);
+		Comment com = new Comment("Ceci est un commentaire", serviceTopic.getAllTopic().get(0), serviceUser.getAllUser().get(0));
+		com = service.addComment(com);
 		com.setCorpus("Commentaire mis à jour");
 		service.updateComment(com);
 		
@@ -59,7 +60,7 @@ public class CommentServiceTest {
 	public void testDeleteComment(){
 		List<Comment> listBefore = service.getAllComments();
 		int sizeBefore = listBefore.size();
-		Comment com = service.getCommentById(5L);
+		Comment com = service.getAllComments().get(0);
 		service.deleteComment(com.getIdComment());
 		List<Comment> listAfter = service.getAllComments();
 		int sizeAfter = listAfter.size();

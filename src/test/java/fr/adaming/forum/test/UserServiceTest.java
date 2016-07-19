@@ -78,7 +78,7 @@ public class UserServiceTest {
 	
 	 @Test
 	 public void testUpdateUser(){
-		 User user = service.addUser(this.createDefaultUser());
+		 User user = service.addUser(createDefaultUser());
 		 User updatedUser = service.getUserById(user.getIdUser());
 		 updatedUser.setFirstName("HULK");
 		 updatedUser = service.updateUser(updatedUser);
@@ -93,7 +93,7 @@ public class UserServiceTest {
 		 System.out.println(user);
 	 }
 	 
-	 private User createDefaultUser(){
+	 public static User createDefaultUser(){
 		Role role = new Role("Admin");
 		serviceRole.addRole(role);
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
