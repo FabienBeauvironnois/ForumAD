@@ -57,7 +57,7 @@ public class SkillRest {
 		return skillservice.deleteSkill(idSkill);
 	}
 	
-	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
+	@RequestMapping(value="/updateSkill", method=RequestMethod.PUT)
 	public Skill updateSkill(@RequestBody Skill skill){
 		return skillservice.updateSkill(skill);
 	}

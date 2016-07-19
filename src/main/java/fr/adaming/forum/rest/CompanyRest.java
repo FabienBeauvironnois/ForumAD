@@ -57,7 +57,7 @@ public class CompanyRest {
 		return companyService.deleteCompany(idCompany);
 	}
 	
-	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
+	@RequestMapping(value="/updateCompany", method=RequestMethod.PUT)
 	public Company updateCompany(@RequestBody Company company){
 		return companyService.updateCompany(company);
 	}
