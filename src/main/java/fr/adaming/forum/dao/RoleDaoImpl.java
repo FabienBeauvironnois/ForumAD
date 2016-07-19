@@ -57,7 +57,12 @@ public class RoleDaoImpl implements IRoleDao {
 	@Override
 	public Role getRoleById(Long idRole) {
 		Role role = em.find(Role.class, idRole);
-		log.info("Le role "+ role +" est dans la base de donnée" );
+		if(role != null){
+			log.info("Le role "+ role +" est dans la base de donnée" );
+		}else{
+			log.info("Le role "+ idRole +" n'est pas dans la base de donnée" );
+		}
+		
 		return role;
 	}
 

@@ -29,7 +29,11 @@ public class FormationDaoImpl implements IFormationDao{
 	@Override
 	public Formation getFormationById(Long idFormation) {
 		Formation formation = em.find(Formation.class, idFormation);
-		log.info("La formation "+ formation +" est dans la base de donnée" );
+		if(formation != null){
+			log.info("La formation "+ formation.getFormationName() +" est dans la base de donnée" );
+		}else{
+			log.info("La formation "+ idFormation + " n'a pas été trouvé");
+		}
 		return formation;
 	}
 

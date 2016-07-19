@@ -38,6 +38,7 @@ public class CompanyDaoImpl implements ICompanyDao {
 	public Company deleteCompany(Long idCompany) {
 		Company company = em.find(Company.class, idCompany);
 		em.remove(company);
+		
 		log.info("La société " + company.getCompanyName()+ " à été supprimé");
 		return company;
 	}
@@ -45,7 +46,12 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@Override
 	public Company getCompanyById(Long idCompany) {
 		Company company = em.find(Company.class, idCompany);
-		log.info("La société "+company.getCompanyName()+ " à été trouvé");
+		if(company != null){
+			log.info("La société "+company.getCompanyName()+ " à été trouvé");
+		}else{
+			log.info("La société "+idCompany+ " n'a pas été trouvé");
+		}
+		
 		return company;
 	}
 

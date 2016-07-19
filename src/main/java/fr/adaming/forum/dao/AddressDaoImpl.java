@@ -26,7 +26,11 @@ public class AddressDaoImpl implements IAddressDao {
 	@Override
 	public Address getAdresseById(Long idAddress) {
 		Address a = em.find(Address.class, idAddress);
-		log.info("L'adresse "+a+" est dans la base de donnée" );
+		if(a != null){
+			log.info("L'adresse "+a+" est dans la base de donnée" );
+		}else{
+			log.info("L'adresse "+idAddress+" n'est pas dans la base de donnée" );
+		}
 		return a;
 	}
 

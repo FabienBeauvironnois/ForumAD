@@ -94,10 +94,12 @@ public class CompanyServiceTest {
 	
 	@Test
 	public void testDeleteCompany() {
+		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
+		address = addressService.addAdresse(address);
+		Company company = companyService.addCompany(new Company("SII", "", address));
+		
 		List<Company> listBefore = companyService.getAllCompany();
-		
-		Company company = companyService.getCompanyById(1L);
-		
+				
 		company = companyService.deleteCompany(company.getIdCompany());
 		
 		List<Company> listAfter = companyService.getAllCompany();

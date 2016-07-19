@@ -67,7 +67,11 @@ public class TopicDaoImpl implements ITopicDao {
 	public Topic getTopicById(Long idTopic) {
 		
 		Topic topic = em.find(Topic.class, idTopic);
-		log.info("Le topic " + topic.getIdTopic() +" à bien été trouvé !");
+		if(topic != null){
+			log.info("Le topic " + topic.getIdTopic() +" à bien été trouvé !");
+		}else{
+			log.info("Le role "+ idTopic +" n'est pas dans la base de donnée" );
+		}
 		
 		return topic;
 	}

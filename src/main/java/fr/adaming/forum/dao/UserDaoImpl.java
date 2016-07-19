@@ -56,8 +56,12 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserById(Long idUser) {
 		User user = em.find(User.class, idUser);
+		if(user != null){
+			log.info("L'utilisateur " + user.getIdUser() + " à bien été trouvé !");
+		}else{
+			log.info("L'utilisateur " + idUser + " n'a pas été trouvé !");
+		}
 		
-		log.info("L'utilisateur " + user.getIdUser() + " à bien été trouvé !");
 		return user;
 	}
 
