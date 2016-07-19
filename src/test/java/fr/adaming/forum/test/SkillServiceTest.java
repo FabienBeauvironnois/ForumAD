@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import fr.adaming.forum.dao.SkillLevel;
-import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.service.ISkillService;
 
@@ -78,14 +77,16 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testUpdateSkill(){
+
 		Skill skill = new Skill("C++",SkillLevel.four);	
 		skill = service.addSkill(skill);	
-		
+
 		Skill s = service.getSkillById(skill.getIdSkill());
 		s.setSkillName("toto");
 		s = service.updateSkill(s);
 		
 		assertFalse( s.equals(skill) );
+
 	}
 
 }

@@ -1,6 +1,6 @@
 package fr.adaming.forum.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class Topic {
 	private User user;
 	
 	@NotNull
-	private LocalDateTime creationDate;
+	private java.sql.Date sqlDate;
 
 	public Topic() {
 		super();
@@ -36,7 +36,8 @@ public class Topic {
 		super();
 		this.title = title;
 		this.user = user;
-		this.creationDate = LocalDateTime.now();
+		Date utilDate = new Date();
+		this.sqlDate = new java.sql.Date(utilDate.getTime());
 	}
 
 	public String getTitle() {
@@ -55,12 +56,13 @@ public class Topic {
 		this.user = user;
 	}
 
-	public LocalDateTime getCreationDate() {
-		return creationDate;
+
+	public java.sql.Date getSqlDate() {
+		return sqlDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
-		this.creationDate = creationDate;
+	public void setSqlDate(java.sql.Date date) {
+		this.sqlDate = date;
 	}
 
 	public Long getIdTopic() {

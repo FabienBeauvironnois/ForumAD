@@ -50,7 +50,7 @@ public class FormationServiceTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetFormationById() {
-		Formation formation = new Formation("JavaEE", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
+		Formation formation = new Formation("C++", "Toulouse", new Date(2016, 04, 18), new Date(2016, 07, 8) , false);
 		Long id = service.addFormation(formation).getIdFormation();
 		formation = service.getFormationById(id);
 		

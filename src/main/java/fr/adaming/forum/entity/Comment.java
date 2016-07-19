@@ -1,6 +1,6 @@
 package fr.adaming.forum.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,43 +25,33 @@ public class Comment {
 	private Topic topic;
 	
 	@NotNull
-	private LocalDateTime date;
+	private java.sql.Date sqlDate;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private User user;
-
-	
 	
 	public Comment(String corpus, Topic topic, User user) {
 		super();
 		this.corpus = corpus;
 		this.topic = topic;
 		this.user = user;
-		this.date = LocalDateTime.now();
-	}
-	
-	
+		Date utilDate = new Date();
+		this.sqlDate = new java.sql.Date(utilDate.getTime());
+	}	
 
 	public Comment() {
 		super();
 	}
 	
-
-	
-
 	public User getUser() {
 		return user;
 	}
 
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
 
 	public String getCorpus() {
 		return corpus;
@@ -79,18 +69,16 @@ public class Comment {
 		this.topic = topic;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
+	public java.sql.Date getDate() {
+		return sqlDate;
 	}
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setDate(java.sql.Date date) {
+		this.sqlDate = date;
 	}
 
 	public Long getIdComment() {
 		return idComment;
 	}
-	
-	
 	
 }
