@@ -39,19 +39,6 @@ public class RoleServiceTest {
 
 	@Test
 	public void testDeleteRole() {
-		Role role = new Role("Moderator");
-		role = service.addRole(role);
-
-		int sizeBefore = service.getAllRole().size();
-		service.deleteRole(role.getIdRole()); // Attention le changer à chaque
-												// fois pour éviter que le test
-												// ne passe pas quand on est en
-												// update.
-		int sizeAfter = service.getAllRole().size();
-
-		assertNotNull(role);
-		assert (sizeBefore > sizeAfter);
-	}
 
 	@Test
 	public void testGetAllRole() {
