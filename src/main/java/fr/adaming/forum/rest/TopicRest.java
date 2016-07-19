@@ -57,7 +57,7 @@ public class TopicRest {
 		return service.deleteTopic(idTopic);
 	}
 	
-	@RequestMapping(value="/updateTopic", method=RequestMethod.POST)
+	@RequestMapping(value="/updateTopic", method=RequestMethod.PUT)
 	public Topic updateTopic(@RequestBody Topic topic){
 		return service.updateTopic(topic);
 	}

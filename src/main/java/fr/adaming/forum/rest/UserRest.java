@@ -57,7 +57,7 @@ public class UserRest {
 		return service.deleteUser(idUser);
 	}
 	
-	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
+	@RequestMapping(value="/updateUser", method=RequestMethod.PUT)
 	public User updateUser(@RequestBody User user){
 		return service.updateUser(user);
 	}
