@@ -26,6 +26,10 @@ public class Address {
 	
 	@NotNull
 	private String country;
+	
+//	//@NotNull
+//	@OneToMany(mappedBy="companyAddress")
+//	private Collection<Company> company;
 
 	public Address() {
 		super();
@@ -84,7 +88,13 @@ public class Address {
 		return idAddress;
 	}
 	
-	
-	
+//	public Collection<Company> getCompany() {
+//		return this.company;
+//	}
+//
+//	public void setCompany(Collection<Company> company) {
+//		this.company = company;
+//	}
+//	
 
 }

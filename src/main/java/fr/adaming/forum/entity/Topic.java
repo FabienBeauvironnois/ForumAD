@@ -25,8 +25,8 @@ public class Topic {
 	@JoinColumn(name="idUser")
 	private User user;
 	
-	@NotNull
-	private java.sql.Date sqlDate;
+	@NotNull	
+	private java.sql.Date sqldate;
 
 	public Topic() {
 		super();
@@ -37,7 +37,7 @@ public class Topic {
 		this.title = title;
 		this.user = user;
 		Date utilDate = new Date();
-		this.sqlDate = new java.sql.Date(utilDate.getTime());
+		this.sqldate = new java.sql.Date(utilDate.getTime());
 	}
 
 	public String getTitle() {
@@ -57,19 +57,16 @@ public class Topic {
 	}
 
 
-	public java.sql.Date getSqlDate() {
-		return sqlDate;
+	public Date getDate() {
+		return sqldate;
 	}
 
-	public void setSqlDate(java.sql.Date date) {
-		this.sqlDate = date;
+	public void setDate(java.sql.Date date) {
+		this.sqldate = date;
 	}
 
 	public Long getIdTopic() {
 		return idTopic;
 	}
-	
-	
-	
 
 }
