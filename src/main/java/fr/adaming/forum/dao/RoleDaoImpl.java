@@ -17,13 +17,13 @@ public class RoleDaoImpl implements IRoleDao {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	Logger log = Logger.getLogger("RoleDaoImpl");
-	
+
 	@Override
 	public Role addRole(Role role) {
 		em.persist(role);
-		
+
 		log.info("Le role " + role.getIdRole() + " a bien été ajouté !");
 		return role;
 	}
@@ -31,7 +31,7 @@ public class RoleDaoImpl implements IRoleDao {
 	@Override
 	public Role updateRole(Role role) {
 		em.merge(role);
-		
+
 		log.info("Le role " + role.getIdRole() + " a bien été modifié !");
 		return role;
 	}
@@ -39,9 +39,10 @@ public class RoleDaoImpl implements IRoleDao {
 	@Override
 	public Role deleteRole(Long idRole) {
 		Role role = em.find(Role.class, idRole);
-		em.remove(role);
-		
-		log.info("Le role " + role.getIdRole() + " a bien été supprimé !");
+		if (role != null) {
+			em.remove(role);
+			log.info("Le role " + role.getIdRole() + " a bien été supprimé !");
+		}
 		return role;
 	}
 
@@ -49,7 +50,7 @@ public class RoleDaoImpl implements IRoleDao {
 	@Override
 	public List<Role> getAllRole() {
 		Query query = em.createQuery("From Role");
-		
+
 		log.info(query.getResultList().size() + "role(s) ont été trouvé !");
 		return query.getResultList();
 	}
@@ -57,12 +58,12 @@ public class RoleDaoImpl implements IRoleDao {
 	@Override
 	public Role getRoleById(Long idRole) {
 		Role role = em.find(Role.class, idRole);
-		if(role != null){
-			log.info("Le role "+ role +" est dans la base de donnée" );
-		}else{
-			log.info("Le role "+ idRole +" n'est pas dans la base de donnée" );
+		if (role != null) {
+			log.info("Le role " + role + " est dans la base de donnée");
+		} else {
+			log.warning("Le role " + idRole + " n'est pas dans la base de donnée");
 		}
-		
+
 		return role;
 	}
 

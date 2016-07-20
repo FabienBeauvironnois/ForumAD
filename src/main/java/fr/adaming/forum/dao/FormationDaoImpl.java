@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import fr.adaming.forum.entity.Formation;
 
 @Component
-public class FormationDaoImpl implements IFormationDao{
+public class FormationDaoImpl implements IFormationDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -22,17 +22,17 @@ public class FormationDaoImpl implements IFormationDao{
 	@Override
 	public Formation addFormation(Formation formation) {
 		em.persist(formation);
-		log.info("La formation "+ formation + " a été ajoutée.");
+		log.info("La formation " + formation + " a été ajoutée.");
 		return formation;
 	}
 
 	@Override
 	public Formation getFormationById(Long idFormation) {
 		Formation formation = em.find(Formation.class, idFormation);
-		if(formation != null){
-			log.info("La formation "+ formation.getFormationName() +" est dans la base de donnée" );
-		}else{
-			log.info("La formation "+ idFormation + " n'a pas été trouvé");
+		if (formation != null) {
+			log.info("La formation " + formation.getFormationName() + " est dans la base de donnée");
+		} else {
+			log.warning("La formation " + idFormation + " n'a pas été trouvé");
 		}
 		return formation;
 	}
@@ -40,16 +40,18 @@ public class FormationDaoImpl implements IFormationDao{
 	@Override
 	public Formation updateFormation(Formation formation) {
 		em.merge(formation);
-		log.info("La formation "+ formation +" a été modifiée");
+		log.info("La formation " + formation + " a été modifiée");
 		return formation;
-		
+
 	}
 
 	@Override
 	public Formation deleteFormation(Long idFormation) {
-		Formation formation = em.find(Formation.class, idFormation);
-		em.remove(formation);
-		log.info("La formation "+ formation +" a été supprimée de la base de donnée" );
+		Formation formation = getFormationById(idFormation);
+		if (formation != null) {
+			em.remove(formation);
+			log.info("La formation " + formation + " a été supprimée de la base de donnée");
+		}
 		return formation;
 	}
 
@@ -66,7 +68,7 @@ public class FormationDaoImpl implements IFormationDao{
 	public List<Formation> getFormationByKeyWord(String keyWord) {
 		Query query = em.createQuery("FROM Formation f WHERE f.formationName LIKE :x OR f.city LIKE :x");
 		query.setParameter("x", "%" + keyWord + "%");
-		
+
 		log.info(query.getResultList().size() + " formations ont été trouvé !");
 		return query.getResultList();
 	}

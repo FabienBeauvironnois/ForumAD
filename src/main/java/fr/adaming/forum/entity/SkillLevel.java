@@ -1,4 +1,4 @@
-package fr.adaming.forum.dao;
+package fr.adaming.forum.entity;
 
 public enum SkillLevel {
 	one("niveau 1"),

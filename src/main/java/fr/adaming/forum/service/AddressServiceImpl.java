@@ -38,7 +38,8 @@ public class AddressServiceImpl implements IAddressService{
 
 	@Override
 	public Address deleteAddress(Long idAddress) {
-		return addressDao.deleteAddress(idAddress);
+		Address addressDel = addressDao.deleteAddress(idAddress);
+		return addressDel;
 	}
 
 }
