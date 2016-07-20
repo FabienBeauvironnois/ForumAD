@@ -38,7 +38,7 @@ public class RoleServiceTest {
 	}
 
 	@Test
-	public void testDeleteRole() {
+	public void testDeleteRole() {}
 
 	@Test
 	public void testGetAllRole() {
