@@ -13,16 +13,16 @@ import fr.adaming.forum.entity.User;
 
 @Component
 public class UserDaoImpl implements IUserDao {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	Logger log = Logger.getLogger("UserDaoImpl");
-	
+
 	@Override
 	public User addUser(User user) {
 		em.persist(user);
-		
+
 		log.info("L'utilisateur " + user.getIdUser() + " à bien été ajouté !");
 		return user;
 	}
@@ -30,7 +30,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User updateUser(User user) {
 		em.merge(user);
-		
+
 		log.info("L'utilisateur " + user.getIdUser() + " à bien été modifié !");
 		return user;
 	}
@@ -38,9 +38,10 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User deleteUser(Long idUser) {
 		User user = em.find(User.class, idUser);
-		em.remove(user);
-		
-		log.info("L'utilisateur " + user.getIdUser() + " à bien été supprimé !");
+		if (user != null) {
+			em.remove(user);
+			log.info("L'utilisateur " + user.getIdUser() + " à bien été supprimé !");
+		}
 		return user;
 	}
 
@@ -48,7 +49,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> getAllUser() {
 		Query query = em.createQuery("From User");
-		
+
 		log.info("Il y a " + query.getResultList().size() + " utilisateur(s) !");
 		return query.getResultList();
 	}
@@ -56,21 +57,25 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User getUserById(Long idUser) {
 		User user = em.find(User.class, idUser);
-		if(user != null){
+		if (user != null) {
 			log.info("L'utilisateur " + user.getIdUser() + " à bien été trouvé !");
-		}else{
-			log.info("L'utilisateur " + idUser + " n'a pas été trouvé !");
+		} else {
+			log.warning("L'utilisateur " + idUser + " n'a pas été trouvé !");
 		}
-		
+
 		return user;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {
-		Query query = em.createQuery("FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x"); //OR u.formation.name LIKE :x
+		Query query = em.createQuery(
+				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x"); // OR
+																																											// u.formation.name
+																																											// LIKE
+																																											// :x
 		query.setParameter("x", "%" + keyWord + "%");
-		
+
 		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
 		return query.getResultList();
 	}

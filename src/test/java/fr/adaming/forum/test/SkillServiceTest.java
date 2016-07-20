@@ -8,8 +8,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import fr.adaming.forum.dao.SkillLevel;
+
 import fr.adaming.forum.entity.Skill;
+import fr.adaming.forum.entity.SkillLevel;
 import fr.adaming.forum.service.ISkillService;
 
 public class SkillServiceTest {

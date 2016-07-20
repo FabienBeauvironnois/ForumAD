@@ -31,7 +31,7 @@ public class CommentDaoImpl implements ICommentDao {
 	public List<Comment> getCommentByKeyWord(String keyWord) {
 		Query query = em.createQuery("From Comment c like :x");
 		query.setParameter("x", "%" + keyWord + "%");
-		
+
 		log.info(query.getResultList().size() + " commentaire(s) ont été trouvé !");
 		return query.getResultList();
 	}
@@ -45,12 +45,14 @@ public class CommentDaoImpl implements ICommentDao {
 
 	@Override
 	public Comment deleteComment(Long idComment) {
-		Comment comment = em.find(Comment.class,idComment);
-		em.remove(comment);
-		log.info("Le commentaire " + comment.getIdComment() + " a bien été supprimé!" );
+		Comment comment = getCommentById(idComment);
+		if (comment != null) {
+			em.remove(comment);
+			log.info("Le commentaire " + comment.getIdComment() + " a bien été supprimé!");
+		}
 		return comment;
 	}
-	
+
 	@Override
 	public Comment getCommentById(Long idComment) {
 		Comment comment = em.find(Comment.class, idComment);
@@ -63,7 +65,5 @@ public class CommentDaoImpl implements ICommentDao {
 		Query query = em.createQuery("FROM Comment c");
 		return query.getResultList();
 	}
-
-	
 
 }

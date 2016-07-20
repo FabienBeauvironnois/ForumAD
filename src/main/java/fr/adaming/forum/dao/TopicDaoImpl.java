@@ -13,16 +13,16 @@ import fr.adaming.forum.entity.Topic;
 
 @Component
 public class TopicDaoImpl implements ITopicDao {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	Logger log = Logger.getLogger("TopicDaoImpl");
 
 	@Override
 	public Topic addTopic(Topic topic) {
 		em.persist(topic);
-		
+
 		log.info("Le topic " + topic.getIdTopic() + " a bien été ajouté !");
 		return topic;
 	}
@@ -30,7 +30,7 @@ public class TopicDaoImpl implements ITopicDao {
 	@Override
 	public Topic updateTopic(Topic topic) {
 		em.merge(topic);
-		
+
 		log.info("Le topic " + topic.getIdTopic() + " a bien été modifié !");
 		return topic;
 	}
@@ -38,9 +38,10 @@ public class TopicDaoImpl implements ITopicDao {
 	@Override
 	public Topic deleteTopic(Long idTopic) {
 		Topic topic = em.find(Topic.class, idTopic);
-		em.remove(topic);
-		
-		log.info("Le topic " + topic.getIdTopic() + " à bien été supprimé !");
+		if (topic != null) {
+			em.remove(topic);
+			log.info("Le topic " + topic.getIdTopic() + " à bien été supprimé !");
+		}
 		return topic;
 	}
 
@@ -48,7 +49,7 @@ public class TopicDaoImpl implements ITopicDao {
 	@Override
 	public List<Topic> getAllTopic() {
 		Query query = em.createQuery("From Topic");
-		
+
 		log.info(query.getResultList().size() + " topic(s) ont bien été trouvé !");
 		return query.getResultList();
 	}
@@ -58,21 +59,21 @@ public class TopicDaoImpl implements ITopicDao {
 	public List<Topic> getTopicByKeyWord(String keyWord) {
 		Query query = em.createQuery("From Topic t Where t.title like :x");
 		query.setParameter("x", "%" + keyWord + "%");
-		
+
 		log.info(query.getResultList().size() + " topic(s) ont bien été trouvé !");
 		return query.getResultList();
 	}
 
 	@Override
 	public Topic getTopicById(Long idTopic) {
-		
+
 		Topic topic = em.find(Topic.class, idTopic);
-		if(topic != null){
-			log.info("Le topic " + topic.getIdTopic() +" à bien été trouvé !");
-		}else{
-			log.info("Le role "+ idTopic +" n'est pas dans la base de donnée" );
+		if (topic != null) {
+			log.info("Le topic " + topic.getIdTopic() + " à bien été trouvé !");
+		} else {
+			log.warning("Le role " + idTopic + " n'est pas dans la base de donnée");
 		}
-		
+
 		return topic;
 	}
 

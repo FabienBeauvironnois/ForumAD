@@ -3,7 +3,6 @@ package fr.adaming.forum.dao;
 import java.util.List;
 import java.util.logging.Logger;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,42 +15,43 @@ import fr.adaming.forum.entity.Company;
 public class CompanyDaoImpl implements ICompanyDao {
 
 	Logger log = Logger.getLogger("CompanyDaoImpl");
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Company addCompany(Company company) {
 		em.persist(company);
-		log.info("La société "+company.getCompanyName()+ " à été ajouté");
+		log.info("La société " + company.getCompanyName() + " à été ajouté");
 		return company;
 	}
 
 	@Override
 	public Company updateCompany(Company company) {
 		em.merge(company);
-		log.info("La société " + company.getCompanyName()+ " à été mis à jour");
+		log.info("La société " + company.getCompanyName() + " à été mis à jour");
 		return company;
 	}
 
 	@Override
 	public Company deleteCompany(Long idCompany) {
-		Company company = em.find(Company.class, idCompany);
-		em.remove(company);
-		
-		log.info("La société " + company.getCompanyName()+ " à été supprimé");
+		Company company = getCompanyById(idCompany);
+		if (company != null) {
+			em.remove(company);
+			log.info("La société " + company.getCompanyName() + " à été supprimé");
+		}
 		return company;
 	}
 
 	@Override
 	public Company getCompanyById(Long idCompany) {
 		Company company = em.find(Company.class, idCompany);
-		if(company != null){
-			log.info("La société "+company.getCompanyName()+ " à été trouvé");
-		}else{
-			log.info("La société "+idCompany+ " n'a pas été trouvé");
+		if (company != null) {
+			log.info("La société " + company.getCompanyName() + " à été trouvé");
+		} else {
+			log.warning("La société " + idCompany + " n'a pas été trouvé");
 		}
-		
+
 		return company;
 	}
 
@@ -59,7 +59,7 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@Override
 	public List<Company> getAllCompany() {
 		Query query = em.createQuery("From Company");
-		log.info("il y a "+query.getResultList().size()+" société");
+		log.info("il y a " + query.getResultList().size() + " société");
 		return query.getResultList();
 	}
 
@@ -67,8 +67,8 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@Override
 	public List<Company> getCompanyByMc(String keyword) {
 		Query query = em.createQuery("From Company c Where c.companyName like :x");
-		query.setParameter("x", "%" +keyword+"%");
-		log.info(query.getResultList().size()+" société ont été trouvé");
+		query.setParameter("x", "%" + keyword + "%");
+		log.info(query.getResultList().size() + " société ont été trouvé");
 		return query.getResultList();
 	}
 
