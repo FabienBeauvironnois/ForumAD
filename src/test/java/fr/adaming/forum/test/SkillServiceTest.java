@@ -2,6 +2,7 @@ package fr.adaming.forum.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -63,7 +64,7 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testGetAllSkills(){
-		List<Skill> skill = service.getAllSkills();
+		Collection<Skill> skill = service.getAllSkills();
 		assertNotNull(skill);
 	}
 	
@@ -71,7 +72,7 @@ public class SkillServiceTest {
 	public void testGetSkillByKeyword(){
 		Skill skill = new Skill("Python", SkillLevel.three);
 		service.addSkill(skill);
-		List<Skill> skillform = service.getSkillByKeyWord("Python");
+		Collection<Skill> skillform = service.getSkillByKeyWord("Python");
 		
 		assertFalse(skillform.isEmpty());
 	}

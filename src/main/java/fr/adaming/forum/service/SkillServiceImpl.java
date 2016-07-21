@@ -1,7 +1,8 @@
 package fr.adaming.forum.service;
 
+import java.util.Collection;
 import java.util.List;
-
+import java.util.Set;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ public class SkillServiceImpl implements ISkillService{
 	}
 
 	@Override
-	public List<Skill> getSkillByKeyWord(String keyWord) {
+	public Collection<Skill> getSkillByKeyWord(String keyWord) {
 		return skillDao.getSkillByKeyWord(keyWord);
 	}
 
@@ -45,7 +46,7 @@ public class SkillServiceImpl implements ISkillService{
 	}
 
 	@Override
-	public List<Skill> getAllSkills() {
+	public Collection<Skill> getAllSkills() {
 		return skillDao.getAllSkills();
 	}
 

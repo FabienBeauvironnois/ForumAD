@@ -1,11 +1,15 @@
 package fr.adaming.forum.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -43,6 +47,9 @@ public class User {
 	@NotNull
 	@Pattern(regexp=".+@.+\\.[a-z]+", message="Invalid email address!")
 	private String email;
+	
+	@OneToMany
+	private Set<Skill> skills = new HashSet<Skill>();
 	
 	@NotNull
 //	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
@@ -144,6 +151,14 @@ public class User {
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+	public Set<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
 	}
 	
 	

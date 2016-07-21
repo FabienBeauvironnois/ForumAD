@@ -2,8 +2,10 @@ package fr.adaming.forum.entity;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +38,8 @@ public class Formation {
 	@NotNull
 	private boolean status;
 	
-	@OneToMany(mappedBy="formation")
-	private Collection<User> user;
+	@OneToMany(mappedBy="formation", fetch=FetchType.EAGER)
+	private Set<User> user;
 
 	public Formation() {
 		super();
@@ -96,11 +98,11 @@ public class Formation {
 		return idFormation;
 	}
 
-	public Collection<User> getUser() {
+	public Set<User> getUsers() {
 		return user;
 	}
 
-	public void setUser(Collection<User> user) {
+	public void setUsers(Set<User> user) {
 		this.user = user;
 	}
 	

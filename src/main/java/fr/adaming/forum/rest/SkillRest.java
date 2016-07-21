@@ -1,5 +1,6 @@
 package fr.adaming.forum.rest;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class SkillRest {
 	private ISkillService skillservice;
 	
 	@RequestMapping(value="/getAllSkills",method=RequestMethod.GET)
-	public List<Skill> getAllSkills(){
+	public Collection<Skill> getAllSkills(){
 		return skillservice.getAllSkills();
 	}
 	
@@ -48,7 +49,7 @@ public class SkillRest {
 	}
 	
 	@RequestMapping(value="/getSkillByKeyWord/{keyWord}", method=RequestMethod.GET)
-	public List<Skill> getSkillByKeyWord(@PathVariable String keyWord){
+	public Collection<Skill> getSkillByKeyWord(@PathVariable String keyWord){
 		return skillservice.getSkillByKeyWord(keyWord);
 	}
 	

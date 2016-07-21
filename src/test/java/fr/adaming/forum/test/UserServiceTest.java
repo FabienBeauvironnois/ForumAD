@@ -4,7 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,11 +17,13 @@ import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.Company;
 import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Role;
+import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
 import fr.adaming.forum.service.IAddressService;
 import fr.adaming.forum.service.ICompanyService;
 import fr.adaming.forum.service.IFormationService;
 import fr.adaming.forum.service.IRoleService;
+import fr.adaming.forum.service.ISkillService;
 import fr.adaming.forum.service.IUserService;
 
 public class UserServiceTest {
@@ -30,7 +34,8 @@ public class UserServiceTest {
 	private static IFormationService serviceFormation;
 	private static IRoleService serviceRole;
 	private static ICompanyService serviceCompany;
-
+	private static ISkillService serviceSkill;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		context = new ClassPathXmlApplicationContext("app.xml");
@@ -39,6 +44,7 @@ public class UserServiceTest {
 		serviceFormation = (IFormationService) context.getBean("serviceFormation");
 		serviceRole = (IRoleService) context.getBean("serviceRole");
 		serviceCompany = (ICompanyService) context.getBean("serviceCompany");
+		serviceSkill = (ISkillService) context.getBean("serviceSkill");
 	}
 
 	@AfterClass
@@ -49,16 +55,29 @@ public class UserServiceTest {
 	@Test
 	public void testAddUser() {
 		Role role = new Role("Admin");
-		serviceRole.addRole(role);
+		role = serviceRole.addRole(role);
+		/*
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
-		serviceFormation.addFormation(formation);
+		formation = serviceFormation.addFormation(formation);
+		*/
+		Formation formation = serviceFormation.getFormationById(1L);
+		
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		serviceAddress.addAddress(address);
+		address = serviceAddress.addAddress(address);
+		
 		Company company = new Company("adaming", "Toulouse", address);
-		serviceCompany.addCompany(company);
+		company = serviceCompany.addCompany(company);
+		
 		User user = new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
-		service.addUser(user);
+		user.setSkills( new HashSet<Skill>());
+		user = service.addUser(user);
 	
+		//User user2 = new User("Test multiUser in formation", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
+		
+		
+		System.out.println( "USERS DANS LA FORMATION : " + serviceFormation.getFormationById(formation.getIdFormation()).getUsers().size() );
+		
+		
 		assertNotNull(user.getName());
 	}
 	
@@ -76,6 +95,7 @@ public class UserServiceTest {
 //
 //	}
 	
+	/*
 	 @Test
 	 public void testUpdateUser(){
 		 User user = service.addUser(createDefaultUser());
@@ -93,6 +113,8 @@ public class UserServiceTest {
 		 System.out.println(user);
 	 }
 	 
+	 */
+	
 	 public static User createDefaultUser(){
 		Role role = new Role("Admin");
 		serviceRole.addRole(role);

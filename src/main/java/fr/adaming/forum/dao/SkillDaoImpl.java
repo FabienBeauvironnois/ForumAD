@@ -1,6 +1,8 @@
 package fr.adaming.forum.dao;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -28,7 +30,7 @@ public class SkillDaoImpl implements ISkillDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Skill> getSkillByKeyWord(String keyWord) {
+	public Collection<Skill> getSkillByKeyWord(String keyWord) {
 		Query query = em.createQuery("FROM Skill s where s.skillName like :x OR s.skillLevel like :x");
 		query.setParameter("x", "%" + keyWord + "%");
 		log.info("Il y a " + query.getResultList().size() + " compétences qui inclue(nt) le mot clé " + keyWord);
@@ -54,7 +56,7 @@ public class SkillDaoImpl implements ISkillDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Skill> getAllSkills() {
+	public Collection<Skill> getAllSkills() {
 		Query query = em.createQuery("FROM Skill");
 		log.info("Il y a " + query.getResultList().size() + "compétences");
 		return query.getResultList();
