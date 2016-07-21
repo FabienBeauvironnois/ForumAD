@@ -56,11 +56,11 @@ public class UserServiceTest {
 	public void testAddUser() {
 		Role role = new Role("Admin");
 		role = serviceRole.addRole(role);
-		/*
+		
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
 		formation = serviceFormation.addFormation(formation);
-		*/
-		Formation formation = serviceFormation.getFormationById(1L);
+		
+		//Formation formation = serviceFormation.getFormationById(1L);
 		
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
 		address = serviceAddress.addAddress(address);

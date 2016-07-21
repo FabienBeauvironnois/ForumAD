@@ -44,6 +44,7 @@ public class CompanyServiceTest {
 		
 	}
 	
+	/*
 	@Test
 	public void testGetCompanyById() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
@@ -106,5 +107,5 @@ public class CompanyServiceTest {
 		
 		assertTrue(listAfter.size() == (listBefore.size()-1));
 	}
-
+*/
 }

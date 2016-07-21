@@ -1,9 +1,13 @@
 package fr.adaming.forum.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -27,9 +31,11 @@ public class Address {
 	@NotNull
 	private String country;
 	
-//	//@NotNull
-//	@OneToMany(mappedBy="companyAddress")
-//	private Collection<Company> company;
+	@OneToMany(mappedBy="personalAddress", orphanRemoval=true)
+	private Set<User> users = new HashSet<User>();
+	
+	@OneToMany(mappedBy="companyAddress", orphanRemoval=true)
+	private Set<Company> companies;
 
 	public Address() {
 		super();
@@ -87,14 +93,23 @@ public class Address {
 	public Long getIdAddress() {
 		return idAddress;
 	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void addUser(User user) {
+		this.users.add(user);
+	}
 	
-//	public Collection<Company> getCompany() {
-//		return this.company;
-//	}
-//
-//	public void setCompany(Collection<Company> company) {
-//		this.company = company;
-//	}
-//	
+	public Set<Company> getCompanies() {
+		return this.companies;
+	}
+
+	public void addCompany(Company company) {
+		this.companies.add(company);
+	}
+	
+	
 
 }

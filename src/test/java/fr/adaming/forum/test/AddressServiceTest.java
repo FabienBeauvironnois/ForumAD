@@ -36,7 +36,7 @@ public class AddressServiceTest {
 		assertNotNull(address.getIdAddress());
 		
 	}
-	
+/*	
 	@Test
 	public void testGetAddressById() {
 		Address address = service.getAddressById(1L);
@@ -69,5 +69,7 @@ public class AddressServiceTest {
 		
 		
 	}
-
+*/
+	
+	
 }

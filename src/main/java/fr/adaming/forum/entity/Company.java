@@ -35,6 +35,12 @@ public class Company {
 		this.companyName = companyName;
 		this.companyBranch = companyBranch;
 		this.companyAddress = companyAddress;
+		
+		System.out.println("COMPANY : "+this);
+		System.out.println( "ADDRESSE : " + companyAddress);
+		companyAddress.addCompany(this);
+
+		System.out.println( "OK!!");
 	}
 
 	public String getCompanyName() {
