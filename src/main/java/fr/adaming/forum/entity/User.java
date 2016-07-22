@@ -79,7 +79,7 @@ public class User {
 		this.password = password;
 		this.formation = formation;
 		
-		personalAddress.addUser(this);
+		//personalAddress.addUser(this);
 	}
 
 	public User() {

@@ -3,7 +3,9 @@ package fr.adaming.forum.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +33,12 @@ public class Address {
 	@NotNull
 	private String country;
 	
-	@OneToMany(mappedBy="personalAddress", orphanRemoval=true)
-	private Set<User> users = new HashSet<User>();
+//	@OneToMany(mappedBy="personalAddress", orphanRemoval=true)
+//	private Set<User> users = new HashSet<User>();
 	
-	@OneToMany(mappedBy="companyAddress", orphanRemoval=true)
-	private Set<Company> companies;
+
+	@OneToMany(mappedBy="companyAddress", orphanRemoval=true, fetch=FetchType.EAGER)
+	private Set<Company> companies = new HashSet<Company>();
 
 	public Address() {
 		super();
@@ -94,13 +97,13 @@ public class Address {
 		return idAddress;
 	}
 
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void addUser(User user) {
-		this.users.add(user);
-	}
+//	public Set<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void addUser(User user) {
+//		this.users.add(user);
+//	}
 	
 	public Set<Company> getCompanies() {
 		return this.companies;

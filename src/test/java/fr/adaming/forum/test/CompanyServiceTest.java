@@ -38,9 +38,22 @@ public class CompanyServiceTest {
 		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
-		company = companyService.addCompany(company);
+		Company company2 = new Company("Adaming2", "", address);
 		
-		assertNotNull(company);
+		company = companyService.addCompany(company);
+		company2 = companyService.addCompany(company2);
+		
+		System.out.println( "Company à cette adresse : " + addressService.getAddressById(address.getIdAddress()).getCompanies().size() );
+		
+		company = companyService.deleteCompany(company.getIdCompany());
+
+		System.out.println( "Company à cette adresse : " + addressService.getAddressById(address.getIdAddress()).getCompanies().size() );
+		
+		company2 = companyService.deleteCompany(company2.getIdCompany());
+		
+		System.out.println( "Company à cette adresse : " + addressService.getAddressById(address.getIdAddress()).getCompanies().size() );
+			
+		assertNotNull(company2);
 		
 	}
 	

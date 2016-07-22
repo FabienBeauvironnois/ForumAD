@@ -1,5 +1,6 @@
 package fr.adaming.forum.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,11 +37,8 @@ public class Company {
 		this.companyBranch = companyBranch;
 		this.companyAddress = companyAddress;
 		
-		System.out.println("COMPANY : "+this);
-		System.out.println( "ADDRESSE : " + companyAddress);
 		companyAddress.addCompany(this);
 
-		System.out.println( "OK!!");
 	}
 
 	public String getCompanyName() {
@@ -65,6 +63,7 @@ public class Company {
 
 	public void setCompanyAddress(Address companyAddress) {
 		this.companyAddress = companyAddress;
+		companyAddress.addCompany(this);
 	}
 
 	public Long getIdCompany() {
