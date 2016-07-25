@@ -70,7 +70,7 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> getCompanyByMc(String keyword) {
-		Query query = em.createQuery("FROM Company c WHERE c.companyName LIKE :x OR c.streetNumber LIKE :x OR c.zipCode LIKE :x OR c.city LIKE :x OR c.country LIKE :x");
+		Query query = em.createQuery("FROM Company c WHERE c.companyName LIKE :x OR c.companyBranch LIKE :x OR c.companyAddress.city LIKE :x OR c.companyAddress.country LIKE :x");
 		query.setParameter("x", "%" + keyword + "%");
 		
 		List<Company> result = query.getResultList();
@@ -81,14 +81,26 @@ public class CompanyDaoImpl implements ICompanyDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> getCompanyByAddress(Address address) {
-		Query query = em.createQuery(
-				"FROM Company c WHERE c.streetNumber LIKE :streetNumber AND c.streetName LIKE :streetName AND c.zipCode LIKE :zipCode AND c.city LIKE :city AND c.country LIKE :country");
+		String queryStr = "FROM Company c WHERE c.companyAddress.streetName LIKE :streetName AND c.companyAddress.streetName LIKE :streetName AND c.companyAddress.city LIKE :city AND c.companyAddress.country LIKE :country";
+		if( address.getStreetNumber()!=null ){
+			queryStr += " AND c.companyAddress.streetNumber LIKE :streetNumber";
+		}
+		if( address.getZipCode()!=null){
+			queryStr += " AND c.companyAddress.zipCode LIKE :zipCode";
+		}
 
-		query.setParameter("streetNumber", "%" + address.getStreetNumber() + "%");
+		Query query = em.createQuery(queryStr);
+		
+		if( address.getStreetNumber()!=null ){
+		query.setParameter("streetNumber", address.getStreetNumber());
+		}
+		if( address.getZipCode()!=null){
+			query.setParameter("zipCode", address.getZipCode());
+		}
 		query.setParameter("streetName", "%" + address.getStreetName() + "%");
-		query.setParameter("zipCode", "%" + address.getZipCode() + "%");
 		query.setParameter("city", "%" + address.getCity() + "%");
-		query.setParameter("coutry", "%" + address.getCountry() + "%");
+		query.setParameter("country", "%" + address.getCountry() + "%");
+
 
 		List<Company> result = query.getResultList();
 		log.info(result.size() + " companies ont été trouvées !");

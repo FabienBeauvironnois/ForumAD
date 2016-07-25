@@ -48,11 +48,11 @@ public class Address implements Serializable {
 		this.country = country;
 	}
 
-	public int getStreetNumber() {
+	public Integer getStreetNumber() {
 		return streetNumber;
 	}
 
-	public void setStreetNumber(int streetNumber) {
+	public void setStreetNumber(Integer streetNumber) {
 		this.streetNumber = streetNumber;
 	}
 
@@ -64,11 +64,11 @@ public class Address implements Serializable {
 		this.streetName = streetName;
 	}
 
-	public int getZipCode() {
+	public Integer getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(int zipCode) {
+	public void setZipCode(Integer zipCode) {
 		this.zipCode = zipCode;
 	}
 

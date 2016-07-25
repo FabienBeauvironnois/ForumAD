@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.forum.dao.ICompanyDao;
+import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.Company;
 
 @Transactional
@@ -50,6 +51,11 @@ public class CompanyServiceImpl implements ICompanyService{
 	@Override
 	public List<Company> getCompanyByMc(String keyword) {
 		return companyDao.getCompanyByMc(keyword);
+	}
+	
+	@Override
+	public List<Company> getCompanyByAddress(Address address) {
+		return companyDao.getCompanyByAddress(address);
 	}
 
 }

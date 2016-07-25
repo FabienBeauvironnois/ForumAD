@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.forum.dao.IUserDao;
+import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.User;
 
 @Transactional
@@ -51,5 +52,10 @@ public class UserServiceImpl implements IUserService{
 	public List<User> getUserByKeyWord(String keyWord) {
 		return userDao.getUserByKeyWord(keyWord);
 	}
-
+	
+	@Override
+	public List<User> getUserByAddress(Address address){
+		return userDao.getUserByAddress(address);
+	}
+	
 }

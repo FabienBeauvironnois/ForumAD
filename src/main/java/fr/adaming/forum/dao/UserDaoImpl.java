@@ -71,7 +71,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {
 		Query query = em.createQuery(
-				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x OR c.streetNumber LIKE :x OR c.zipCode LIKE :x OR c.city LIKE :x OR c.country LIKE :x");
+				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x OR c.companyName LIKE :x OR c.companyAddress.city LIKE :x OR c.companyAddress.country LIKE :x OR u.personalAddress.city LIKE :x OR u.personalAddress.country LIKE :x");
 
 		query.setParameter("x", "%" + keyWord + "%");
 		List<User> result = query.getResultList();
@@ -82,17 +82,29 @@ public class UserDaoImpl implements IUserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByAddress(Address address) {
-		Query query = em.createQuery(
-				"FROM User u WHERE u.streetNumber LIKE :streetNumber AND u.streetName LIKE :streetName AND u.zipCode LIKE :zipCode AND u.city LIKE :city AND u.country LIKE :country");
+		String queryStr = "FROM User u WHERE u.personalAddress.streetName LIKE :streetName AND u.personalAddress.streetName LIKE :streetName AND u.personalAddress.city LIKE :city AND u.personalAddress.country LIKE :country";
+		
+		if( address.getStreetNumber()!=null ){
+			queryStr += " AND u.personalAddress.streetNumber LIKE :streetNumber";
+		}
+		if( address.getZipCode()!=null){
+			queryStr += " AND u.personalAddress.zipCode LIKE :zipCode";
+		}
 
-		query.setParameter("streetNumber", "%" + address.getStreetNumber() + "%");
+		Query query = em.createQuery(queryStr);
+		
+		if( address.getStreetNumber()!=null ){
+		query.setParameter("streetNumber", address.getStreetNumber());
+		}
+		if( address.getZipCode()!=null){
+			query.setParameter("zipCode", address.getZipCode());
+		}
 		query.setParameter("streetName", "%" + address.getStreetName() + "%");
-		query.setParameter("zipCode", "%" + address.getZipCode() + "%");
 		query.setParameter("city", "%" + address.getCity() + "%");
-		query.setParameter("coutry", "%" + address.getCountry() + "%");
+		query.setParameter("country", "%" + address.getCountry() + "%");
 
 		List<User> result = query.getResultList();
-		log.info(result.size() + "utilisateur(s) ont été trouvé !");
+		log.info(result.size() + " utilisateur(s) ont été trouvé !");
 		return result;
 	}
 

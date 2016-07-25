@@ -18,20 +18,18 @@ public class CompanyServiceTest {
 	
 	private static ClassPathXmlApplicationContext context;
 	private static ICompanyService companyService;
-	private static IAddressService addressService;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		context = new ClassPathXmlApplicationContext("app.xml");
 		companyService = (ICompanyService) context.getBean("serviceCompany");
-		addressService = (IAddressService) context.getBean("serviceAddress");
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		context.close();
 	}
-
+/*
 	@Test
 	public void testAddCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
@@ -42,11 +40,10 @@ public class CompanyServiceTest {
 		
 	}
 	
-	/*
+	
 	@Test
 	public void testGetCompanyById() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
 		company = companyService.addCompany(company);
@@ -59,7 +56,6 @@ public class CompanyServiceTest {
 	@Test
 	public void testUpdateCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAddress(address);
 		Company company = new Company("Adaming", "", address);
 		
 		company = companyService.addCompany(company);
@@ -83,18 +79,18 @@ public class CompanyServiceTest {
 	@Test
 	public void testGetCompanyByMc() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAddress(address);
 		companyService.addCompany(new Company("SII", "", address));
 		
 		List<Company> companyList = companyService.getCompanyByMc("SII");
+		List<Company> companyList2 = companyService.getCompanyByMc("Bidonville");
 		
-		assertNotNull(companyList);
+		
+		assertTrue(companyList.size()>0 && companyList2.size()>0);
 	}
 	
 	@Test
 	public void testDeleteCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		address = addressService.addAddress(address);
 		Company company = companyService.addCompany(new Company("SII", "", address));
 		
 		List<Company> listBefore = companyService.getAllCompany();
@@ -106,4 +102,21 @@ public class CompanyServiceTest {
 		assertTrue(listAfter.size() == (listBefore.size()-1));
 	}
 */
+	@Test
+	public void testGetCompanyByAddress() {
+		Address address = new Address(5, "rue bidon", 31000, "Bidonville", "BidonLand");
+		Company company = companyService.addCompany(new Company("SII", "", address));
+		
+		address = new Address(5, "rue bidon", 31200, "Toulouse", "BidonLand");
+		companyService.addCompany(new Company("SII", "", address));
+		
+		
+		address = new Address(null, "", 31000, "", "");
+		List<Company> list = companyService.getCompanyByAddress(address);
+		
+		System.out.println(list.size());
+		assertNotNull(list);
+	}
+		
+	
 }
