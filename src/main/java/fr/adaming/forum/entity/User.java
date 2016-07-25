@@ -3,6 +3,10 @@ package fr.adaming.forum.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +30,14 @@ public class User {
 	@NotNull
 	private String name;
 	
+	@Embedded
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "streetName", column = @Column(nullable = false)),
+		@AttributeOverride(name = "zipCode", column = @Column(nullable = false)),
+		@AttributeOverride(name = "city", column = @Column(nullable = false)),
+		@AttributeOverride(name = "country", column = @Column(nullable = false))
+		})
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name="idAddress")
 	private Address personalAddress;
 	
 	@ManyToOne

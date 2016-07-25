@@ -1,30 +1,29 @@
 package fr.adaming.forum.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Company {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCompany;
-	
+
 	@NotNull
 	private String companyName;
-	
+
 	@NotNull
 	private String companyBranch;
-	
+
+	@Embedded
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "streetName", column = @Column(nullable = false)),
+		@AttributeOverride(name = "zipCode", column = @Column(nullable = false)),
+		@AttributeOverride(name = "city", column = @Column(nullable = false)),
+		@AttributeOverride(name = "country", column = @Column(nullable = false))
+		})
 	@NotNull
-	@ManyToOne
-	@JoinColumn(name="idAddress")
 	private Address companyAddress;
 
 	public Company() {
@@ -36,8 +35,6 @@ public class Company {
 		this.companyName = companyName;
 		this.companyBranch = companyBranch;
 		this.companyAddress = companyAddress;
-		
-		companyAddress.addCompany(this);
 
 	}
 
@@ -63,14 +60,10 @@ public class Company {
 
 	public void setCompanyAddress(Address companyAddress) {
 		this.companyAddress = companyAddress;
-		companyAddress.addCompany(this);
 	}
 
 	public Long getIdCompany() {
 		return idCompany;
 	}
-	
-	
-	
 
 }

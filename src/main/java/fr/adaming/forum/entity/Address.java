@@ -1,9 +1,12 @@
 package fr.adaming.forum.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,20 +15,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class Address {
+import org.hibernate.annotations.Formula;
+
+@Embeddable
+public class Address implements Serializable {
+		
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idAddress;
+	private Integer streetNumber;
 	
-	private int streetNumber;
-	
-	@NotNull
+	@NotNull //Ne fonctionne pas avec Embedded : définir nullable=false dans les entités l'incluant
 	private String streetName;
 	
 	@NotNull
-	private int zipCode;
+	private Integer zipCode;
 	
 	@NotNull
 	private String city;
@@ -33,18 +35,11 @@ public class Address {
 	@NotNull
 	private String country;
 	
-//	@OneToMany(mappedBy="personalAddress", orphanRemoval=true)
-//	private Set<User> users = new HashSet<User>();
-	
-
-	@OneToMany(mappedBy="companyAddress", orphanRemoval=true, fetch=FetchType.EAGER)
-	private Set<Company> companies = new HashSet<Company>();
-
 	public Address() {
 		super();
 	}
 
-	public Address(int streetNumber, String streetName, int zipCode, String city, String country) {
+	public Address(Integer streetNumber, String streetName, Integer zipCode, String city, String country) {
 		super();
 		this.streetNumber = streetNumber;
 		this.streetName = streetName;
@@ -91,26 +86,6 @@ public class Address {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public Long getIdAddress() {
-		return idAddress;
-	}
-
-//	public Set<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void addUser(User user) {
-//		this.users.add(user);
-//	}
-	
-	public Set<Company> getCompanies() {
-		return this.companies;
-	}
-
-	public void addCompany(Company company) {
-		this.companies.add(company);
 	}
 	
 	

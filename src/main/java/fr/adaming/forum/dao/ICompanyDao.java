@@ -2,7 +2,9 @@ package fr.adaming.forum.dao;
 
 import java.util.List;
 
+import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.Company;
+import fr.adaming.forum.entity.User;
 
 public interface ICompanyDao {
 
@@ -13,4 +15,5 @@ public interface ICompanyDao {
 	public Company getCompanyById(Long idCompany);
 	public List<Company> getAllCompany();
 	public List<Company> getCompanyByMc(String keyword);
+	List<Company> getCompanyByAddress(Address address);
 }

@@ -6,11 +6,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<!-- Injection Address -->
-	<bean id="daoAddress" class="fr.adaming.forum.dao.AddressDaoImpl"></bean>
-	<bean id="serviceAddress" class="fr.adaming.forum.service.AddressServiceImpl">
-		<property name="addressDao" ref="daoAddress"></property>
-	</bean>
 
 	<!--Injection Comment -->
 	<bean id="daoComment" class="fr.adaming.forum.dao.CommentDaoImpl"></bean>

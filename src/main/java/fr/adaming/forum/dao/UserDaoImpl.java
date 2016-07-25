@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
+import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.User;
 
 @Component
@@ -70,11 +71,25 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {
 		Query query = em.createQuery(
-				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x"); // OR
-																																											// u.formation.name
-																																											// LIKE
-																																											// :x
+				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x OR c.streetNumber LIKE :x OR c.zipCode LIKE :x OR c.city LIKE :x OR c.country LIKE :x");
+
 		query.setParameter("x", "%" + keyWord + "%");
+
+		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUserByAddress(Address address) {
+		Query query = em.createQuery(
+				"FROM User u WHERE u.streetNumber LIKE :streetNumber AND u.streetName LIKE :streetName AND u.zipCode LIKE :zipCode AND u.city LIKE :city AND u.country LIKE :country");
+
+		query.setParameter("streetNumber", "%" + address.getStreetNumber() + "%");
+		query.setParameter("streetName", "%" + address.getStreetName() + "%");
+		query.setParameter("zipCode", "%" + address.getZipCode() + "%");
+		query.setParameter("city", "%" + address.getCity() + "%");
+		query.setParameter("coutry", "%" + address.getCountry() + "%");
 
 		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
 		return query.getResultList();

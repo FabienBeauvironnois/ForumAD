@@ -2,6 +2,7 @@ package fr.adaming.forum.dao;
 
 import java.util.List;
 
+import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.User;
 
 public interface IUserDao {
@@ -13,5 +14,6 @@ public interface IUserDao {
 	public List<User> getAllUser();
 	public User getUserById(Long idUser);
 	public List<User> getUserByKeyWord(String keyWord);
+	List<User> getUserByAddress(Address address);
 
 }
