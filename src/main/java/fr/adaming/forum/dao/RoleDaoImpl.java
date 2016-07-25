@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import fr.adaming.forum.entity.Address;
+import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Role;
 
 @Component
@@ -51,8 +52,9 @@ public class RoleDaoImpl implements IRoleDao {
 	public List<Role> getAllRole() {
 		Query query = em.createQuery("From Role");
 
-		log.info(query.getResultList().size() + "role(s) ont été trouvé !");
-		return query.getResultList();
+		List<Role> result = query.getResultList();
+		log.info(result.size() + "role(s) ont été trouvé !");
+		return result;
 	}
 
 	@Override

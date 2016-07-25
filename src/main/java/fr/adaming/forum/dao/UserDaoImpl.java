@@ -50,9 +50,9 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> getAllUser() {
 		Query query = em.createQuery("From User");
-
-		log.info("Il y a " + query.getResultList().size() + " utilisateur(s) !");
-		return query.getResultList();
+		List<User> result = query.getResultList();
+		log.info("Il y a " + result.size() + " utilisateur(s) !");
+		return result;
 	}
 
 	@Override
@@ -74,9 +74,9 @@ public class UserDaoImpl implements IUserDao {
 				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x OR c.streetNumber LIKE :x OR c.zipCode LIKE :x OR c.city LIKE :x OR c.country LIKE :x");
 
 		query.setParameter("x", "%" + keyWord + "%");
-
-		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
-		return query.getResultList();
+		List<User> result = query.getResultList();
+		log.info(result.size() + "utilisateur(s) ont été trouvé !");
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -91,8 +91,9 @@ public class UserDaoImpl implements IUserDao {
 		query.setParameter("city", "%" + address.getCity() + "%");
 		query.setParameter("coutry", "%" + address.getCountry() + "%");
 
-		log.info(query.getResultList().size() + "utilisateur(s) ont été trouvé !");
-		return query.getResultList();
+		List<User> result = query.getResultList();
+		log.info(result.size() + "utilisateur(s) ont été trouvé !");
+		return result;
 	}
 
 }

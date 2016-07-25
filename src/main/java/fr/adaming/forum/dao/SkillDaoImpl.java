@@ -33,8 +33,9 @@ public class SkillDaoImpl implements ISkillDao {
 	public Collection<Skill> getSkillByKeyWord(String keyWord) {
 		Query query = em.createQuery("FROM Skill s where s.skillName like :x OR s.skillLevel like :x");
 		query.setParameter("x", "%" + keyWord + "%");
-		log.info("Il y a " + query.getResultList().size() + " compétences qui inclue(nt) le mot clé " + keyWord);
-		return query.getResultList();
+		Collection<Skill> result = query.getResultList();
+		log.info("Il y a " + result.size() + " compétences qui inclue(nt) le mot clé " + keyWord);
+		return result;
 	}
 
 	@Override
@@ -58,8 +59,9 @@ public class SkillDaoImpl implements ISkillDao {
 	@Override
 	public Collection<Skill> getAllSkills() {
 		Query query = em.createQuery("FROM Skill");
-		log.info("Il y a " + query.getResultList().size() + "compétences");
-		return query.getResultList();
+		Collection<Skill> result = query.getResultList();
+		log.info("Il y a " + result.size() + "compétences");
+		return result;
 	}
 
 	@Override

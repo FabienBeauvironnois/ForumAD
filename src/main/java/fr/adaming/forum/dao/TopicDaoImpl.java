@@ -49,9 +49,9 @@ public class TopicDaoImpl implements ITopicDao {
 	@Override
 	public List<Topic> getAllTopic() {
 		Query query = em.createQuery("From Topic");
-
-		log.info(query.getResultList().size() + " topic(s) ont bien été trouvé !");
-		return query.getResultList();
+		List<Topic> result = query.getResultList();
+		log.info(result.size() + " topic(s) ont bien été trouvé !");
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,9 +59,9 @@ public class TopicDaoImpl implements ITopicDao {
 	public List<Topic> getTopicByKeyWord(String keyWord) {
 		Query query = em.createQuery("From Topic t Where t.title like :x");
 		query.setParameter("x", "%" + keyWord + "%");
-
-		log.info(query.getResultList().size() + " topic(s) ont bien été trouvé !");
-		return query.getResultList();
+		List<Topic> result = query.getResultList();
+		log.info(result.size() + " topic(s) ont bien été trouvé !");
+		return result;
 	}
 
 	@Override

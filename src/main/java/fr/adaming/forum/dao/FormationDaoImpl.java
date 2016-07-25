@@ -59,8 +59,9 @@ public class FormationDaoImpl implements IFormationDao {
 	@Override
 	public List<Formation> getAllFormations() {
 		Query query = em.createQuery("FROM Formation");
-		log.info("Il y a " + query.getResultList().size() + " Formation(s) !");
-		return query.getResultList();
+		List<Formation> result = query.getResultList();
+		log.info("Il y a " + result.size() + " Formation(s) !");
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,8 +70,9 @@ public class FormationDaoImpl implements IFormationDao {
 		Query query = em.createQuery("FROM Formation f WHERE f.formationName LIKE :x OR f.city LIKE :x");
 		query.setParameter("x", "%" + keyWord + "%");
 
-		log.info(query.getResultList().size() + " formations ont été trouvé !");
-		return query.getResultList();
+		List<Formation> result = query.getResultList();
+		log.info(result.size() + " formations ont été trouvé !");
+		return result;
 	}
 
 }

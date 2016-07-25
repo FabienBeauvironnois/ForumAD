@@ -32,8 +32,9 @@ public class CommentDaoImpl implements ICommentDao {
 		Query query = em.createQuery("From Comment c like :x");
 		query.setParameter("x", "%" + keyWord + "%");
 
-		log.info(query.getResultList().size() + " commentaire(s) ont été trouvé !");
-		return query.getResultList();
+		List<Comment> result = query.getResultList();
+		log.info(result.size() + " commentaire(s) ont été trouvé !");
+		return result;
 	}
 
 	@Override
