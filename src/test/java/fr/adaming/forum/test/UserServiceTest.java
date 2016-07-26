@@ -50,7 +50,7 @@ public class UserServiceTest {
 		context.close();
 	}
 
-	/*
+	
 	@Test
 	public void testAddUser() {
 		Role role = new Role("Admin");
@@ -66,7 +66,7 @@ public class UserServiceTest {
 		Company company = new Company("adaming", "Toulouse", address);
 		company = serviceCompany.addCompany(company);
 		
-		User user = new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
+		User user = new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 		user.setSkills( new HashSet<Skill>());
 		user = service.addUser(user);
 	
@@ -82,9 +82,11 @@ public class UserServiceTest {
 	@Test
 	public void testDeleteUser() {
 		
+		User user = service.addUser(createDefaultUser());
+		
 		List<User> listUser = service.getAllUser();
 		int sizeBefore = listUser.size();
-		User user = service.deleteUser(1L); // Attention le changer à chaque fois pour éviter que le test ne passe pas quand on est en update.
+		user = service.deleteUser(user.getIdUser()); 
 		List<User> listUsersAfter = service.getAllUser();
 		int sizeAfter = listUsersAfter.size();
 		
@@ -115,7 +117,7 @@ public class UserServiceTest {
 		 assertTrue(users.size()>0);
 	 }
 	 
-	 */
+	 
 	 
 		@Test
 		public void testGetCompanyByAddress() {

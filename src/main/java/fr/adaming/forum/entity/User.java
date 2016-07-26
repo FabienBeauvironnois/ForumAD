@@ -93,7 +93,6 @@ public class User {
 		this.formation = formation;
 		this.dateOfBirth = dateOfBirth;
 		
-		//personalAddress.addUser(this);
 	}
 
 	public User() {
