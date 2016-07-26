@@ -32,10 +32,9 @@ public class Comment {
 	@JoinColumn(name="idUser")
 	private User user;
 	
-	public Comment(String corpus, Topic topic, User user) {
+	public Comment(String corpus, User user) {
 		super();
 		this.corpus = corpus;
-		this.topic = topic;
 		this.user = user;
 		Date utilDate = new Date();
 		this.sqlDate = new java.sql.Date(utilDate.getTime());
@@ -61,14 +60,6 @@ public class Comment {
 		this.corpus = corpus;
 	}
 
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-	}
-
 	public java.sql.Date getDate() {
 		return sqlDate;
 	}
@@ -80,5 +71,13 @@ public class Comment {
 	public Long getIdComment() {
 		return idComment;
 	}
+
+	public Topic getTopic() {
+		return topic;
+	}
 	
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+		
 }

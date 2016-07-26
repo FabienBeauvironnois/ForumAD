@@ -1,13 +1,19 @@
 package fr.adaming.forum.entity;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,7 +30,14 @@ public class Topic {
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private User user;
+		
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idComment")
+	private Comment subject;
 	
+	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval=true)
+	private Collection<Comment> comments = new HashSet<Comment>();
+		
 	@NotNull	
 	private java.sql.Date sqldate;
 
@@ -32,12 +45,15 @@ public class Topic {
 		super();
 	}
 
-	public Topic(String title, User user) {
+	public Topic(String title, Comment comment) {
 		super();
 		this.title = title;
-		this.user = user;
+		this.user = comment.getUser();
 		Date utilDate = new Date();
 		this.sqldate = new java.sql.Date(utilDate.getTime());
+		//this.comments.add(comment);
+		this.subject = comment;
+		comment.setTopic(this);
 	}
 
 	public String getTitle() {
@@ -68,5 +84,23 @@ public class Topic {
 	public Long getIdTopic() {
 		return idTopic;
 	}
+
+	
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+
+	public void addComment(Comment comment) {
+		if(comment.getTopic() != this){
+			this.comments.add(comment);
+			comment.setTopic(this);
+		}
+	}
+
+	public Comment getSubject() {
+		return subject;
+	}
+	
+	
 
 }

@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
+import fr.adaming.forum.entity.Comment;
 import fr.adaming.forum.entity.Topic;
 import fr.adaming.forum.entity.User;
 import fr.adaming.forum.service.ITopicService;
@@ -36,8 +36,13 @@ public class TopicServiceTest {
 	public void testAddTopic(){
 		User user = userService.getAllUser().get(0);
 		//user = userService.addUser(user);
-		Topic topic = new Topic("test", user);
+		Comment comment = new Comment("Ceci est un commentaire", user);
+		
+		Topic topic = new Topic("test", comment);
 		topic = topicService.addTopic(topic);
+		
+		comment = (Comment) topic.getComments().toArray()[0];
+		System.out.println(comment.getCorpus());
 		
 		assertNotNull(topic);
 		
