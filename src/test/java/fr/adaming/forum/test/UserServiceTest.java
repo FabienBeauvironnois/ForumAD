@@ -141,7 +141,7 @@ public class UserServiceTest {
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
 		Company company = new Company("adaming", "Toulouse", address);
 		serviceCompany.addCompany(company);
-		return new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
+		return new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 	 }
 		
 }
