@@ -2,19 +2,27 @@ package fr.adaming.forum.entity;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(
+		uniqueConstraints={
+		@UniqueConstraint(name="formation", columnNames={"formationName", "city", "dateBegin", "dateEnd"})
+		})
 public class Formation {
 	
 	@Id
@@ -36,22 +44,22 @@ public class Formation {
 	private Date dateEnd;
 	
 	@NotNull
-	private boolean status;
+	private boolean processing;
 	
 	@OneToMany(mappedBy="formation", fetch=FetchType.EAGER)
-	private Set<User> user;
+	private Set<User> user = new HashSet<User>();
 
 	public Formation() {
 		super();
 	}
 
-	public Formation(String formationName, String city, Date dateBegin, Date dateEnd, boolean status) {
+	public Formation(String formationName, String city, Date dateBegin, Date dateEnd, boolean processing) {
 		super();
 		this.formationName = formationName;
 		this.city = city;
 		this.dateBegin = dateBegin;
 		this.dateEnd = dateEnd;
-		this.status = status;
+		this.processing = processing;
 	}
 
 	public String getFormationName() {
@@ -86,12 +94,12 @@ public class Formation {
 		this.dateEnd = dateEnd;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isProcessing() {
+		return processing;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setProcessing(boolean processing) {
+		this.processing = processing;
 	}
 
 	public Long getIdFormation() {

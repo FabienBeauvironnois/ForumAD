@@ -15,10 +15,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
+@Table(
+uniqueConstraints={
+        @UniqueConstraint(name="user_identity", columnNames={"name", "firstName", "dateOfBirth"})
+    })
 public class User {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,13 +65,13 @@ public class User {
 	
 	@NotNull
 	@Pattern(regexp=".+@.+\\.[a-z]+", message="Invalid email address!")
+	@Column(unique=true)
 	private String email;
 	
 	@OneToMany
 	private Set<Skill> skills = new HashSet<Skill>();
 	
 	@NotNull
-//	@Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
 	@Pattern.List({
 	    @Pattern(regexp = "^(?=.*[0-9]).{0,}$", message = "Password must contain at least one digit."),
 	    @Pattern(regexp = "^(?=.*[a-z]).{0,}$", message = "Password must contain at least one lowercase letter."),

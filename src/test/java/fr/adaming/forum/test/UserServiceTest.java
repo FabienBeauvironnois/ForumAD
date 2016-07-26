@@ -35,6 +35,9 @@ public class UserServiceTest {
 	private static ICompanyService serviceCompany;
 	private static ISkillService serviceSkill;
 	
+	private static User defaultUser;
+	private static User defaultUserDB;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		context = new ClassPathXmlApplicationContext("app.xml");
@@ -43,6 +46,9 @@ public class UserServiceTest {
 		serviceRole = (IRoleService) context.getBean("serviceRole");
 		serviceCompany = (ICompanyService) context.getBean("serviceCompany");
 		serviceSkill = (ISkillService) context.getBean("serviceSkill");
+		
+		defaultUser = createDefaultUser();
+		defaultUserDB = service.addUser(defaultUser);
 	}
 
 	@AfterClass
@@ -53,20 +59,16 @@ public class UserServiceTest {
 	
 	@Test
 	public void testAddUser() {
+		
 		Role role = new Role("Admin");
 		role = serviceRole.addRole(role);
-		
-		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
+		Formation formation = new Formation("JEE", "Toulouse", new Date(), new Date(), true);
 		formation = serviceFormation.addFormation(formation);
-		
 		//Formation formation = serviceFormation.getFormationById(1L);
-		
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		
 		Company company = new Company("adaming", "Toulouse", address);
 		company = serviceCompany.addCompany(company);
-		
-		User user = new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
+		User user = new User("Prenom", "Nom", address, company, role, "monemail@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 		user.setSkills( new HashSet<Skill>());
 		user = service.addUser(user);
 	
@@ -77,12 +79,21 @@ public class UserServiceTest {
 		
 		
 		assertNotNull(user.getName());
+		service.deleteUser(user.getIdUser());
 	}
 	
 	@Test
 	public void testDeleteUser() {
 		
-		User user = service.addUser(createDefaultUser());
+		Role role = new Role("Admin");
+		serviceRole.addRole(role);
+		Formation formation = new Formation("C++", "Toulouse", new Date(), new Date(), true);
+		serviceFormation.addFormation(formation);
+		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
+		Company company = new Company("adaming", "Toulouse", address);
+		serviceCompany.addCompany(company);
+		User user = new User("MUST", "Die", address, company, role, "nothing@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
+		user = service.addUser(user);
 		
 		List<User> listUser = service.getAllUser();
 		int sizeBefore = listUser.size();
@@ -91,14 +102,14 @@ public class UserServiceTest {
 		int sizeAfter = listUsersAfter.size();
 		
 		assertNotNull(user);
-		assert(sizeBefore > sizeAfter);
-
+		assert(sizeBefore == sizeAfter +1);
+		
 	}
 	
 	
 	 @Test
 	 public void testUpdateUser(){
-		 User user = service.addUser(createDefaultUser());
+		 User user = defaultUserDB;
 		 User updatedUser = service.getUserById(user.getIdUser());
 		 updatedUser.setFirstName("HULK");
 		 updatedUser = service.updateUser(updatedUser);
@@ -109,10 +120,10 @@ public class UserServiceTest {
 	 
 	 @Test
 	 public void testGetUserByKeyWord(){
-		 User user = createDefaultUser();
+		 User user = defaultUserDB;
 		 user.setName("TEST_BY_KW");
-		 service.addUser(user);
-		 List<User> users = service.getUserByKeyWord("TEST_BY_KW");
+		 user = service.updateUser(user);
+		 List<User> users = service.getUserByKeyWord(user.getName());
 		 System.out.println(users);
 		 assertTrue(users.size()>0);
 	 }
@@ -120,11 +131,11 @@ public class UserServiceTest {
 	 
 	 
 		@Test
-		public void testGetCompanyByAddress() {
+		public void testGetUserByAddress() {
 			Address address = new Address(5, "rue bidon", 31000, "Bidonville", "BidonLand");
-			User user = createDefaultUser();
+			User user = defaultUserDB;
 			user.setPersonalAddress(address);
-			user = service.addUser(user);
+			user = service.updateUser(user);
 			
 			address = new Address(null, "", 31000, "", "");
 			List<User> list = service.getUserByAddress(address);
