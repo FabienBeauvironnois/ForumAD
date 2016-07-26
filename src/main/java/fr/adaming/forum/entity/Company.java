@@ -4,6 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(
+		uniqueConstraints={
+		@UniqueConstraint(name="company", columnNames={"companyName", "companyBranch"})
+		})
 public class Company {
 
 	@Id

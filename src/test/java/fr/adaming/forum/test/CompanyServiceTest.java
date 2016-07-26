@@ -29,7 +29,7 @@ public class CompanyServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		context.close();
 	}
-/*
+
 	@Test
 	public void testAddCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
@@ -44,7 +44,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testGetCompanyById() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		Company company = new Company("Adaming", "", address);
+		Company company = new Company("Altran", "", address);
 		
 		company = companyService.addCompany(company);
 		
@@ -56,12 +56,12 @@ public class CompanyServiceTest {
 	@Test
 	public void testUpdateCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		Company company = new Company("Adaming", "", address);
+		Company company = new Company("Cap Gemini", "", address);
 		
 		company = companyService.addCompany(company);
 		
 		Company companyUpdate = companyService.getCompanyById(company.getIdCompany());
-		companyUpdate.setCompanyName("Update");
+		companyUpdate.setCompanyName("Updated");
 		
 		companyUpdate = companyService.updateCompany(companyUpdate);
 		
@@ -91,7 +91,7 @@ public class CompanyServiceTest {
 	@Test
 	public void testDeleteCompany() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
-		Company company = companyService.addCompany(new Company("SII", "", address));
+		Company company = companyService.addCompany(new Company("Sopra", "", address));
 		
 		List<Company> listBefore = companyService.getAllCompany();
 				
@@ -101,14 +101,14 @@ public class CompanyServiceTest {
 		
 		assertTrue(listAfter.size() == (listBefore.size()-1));
 	}
-*/
+
 	@Test
 	public void testGetCompanyByAddress() {
 		Address address = new Address(5, "rue bidon", 31000, "Bidonville", "BidonLand");
-		Company company = companyService.addCompany(new Company("SII", "", address));
+		Company company = companyService.addCompany(new Company("Abylsen", "", address));
 		
 		address = new Address(5, "rue bidon", 31200, "Toulouse", "BidonLand");
-		companyService.addCompany(new Company("SII", "", address));
+		companyService.addCompany(new Company("CGI", "", address));
 		
 		
 		address = new Address(null, "", 31000, "", "");
