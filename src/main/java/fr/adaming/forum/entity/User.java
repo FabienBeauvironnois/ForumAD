@@ -1,5 +1,6 @@
 package fr.adaming.forum.entity;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,6 +55,9 @@ public class User {
 	private Role role;
 	
 	@NotNull
+	private Date dateOfBirth; 
+	
+	@NotNull
 	@Pattern(regexp=".+@.+\\.[a-z]+", message="Invalid email address!")
 	private String email;
 	
@@ -77,7 +81,7 @@ public class User {
 	private Formation formation; 
 
 	public User(String firstName, String name, Address personalAddress, Company company, Role role, String email,
-			String password, Formation formation) {
+			String password, Formation formation, Date dateOfBirth) {
 		super();
 		this.firstName = firstName;
 		this.name = name;
@@ -87,6 +91,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.formation = formation;
+		this.dateOfBirth = dateOfBirth;
 		
 		//personalAddress.addUser(this);
 	}
@@ -171,7 +176,13 @@ public class User {
 		this.skills = skills;
 	}
 	
-	
+	public Date getdateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setdateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 	
 	
 
