@@ -3,6 +3,7 @@ package fr.adaming.forum.dao;
 import java.util.List;
 
 import fr.adaming.forum.entity.Address;
+import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
 
 public interface IUserDao {
@@ -15,5 +16,6 @@ public interface IUserDao {
 	public User getUserById(Long idUser);
 	public List<User> getUserByKeyWord(String keyWord);
 	List<User> getUserByAddress(Address address);
+	List<User> getUsersBySkill(Skill skill);
 
 }

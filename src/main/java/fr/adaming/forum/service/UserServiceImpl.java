@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.forum.dao.IUserDao;
 import fr.adaming.forum.entity.Address;
+import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
 
 @Transactional
@@ -58,4 +59,8 @@ public class UserServiceImpl implements IUserService{
 		return userDao.getUserByAddress(address);
 	}
 	
+	@Override
+	public List<User> getUsersBySkill(Skill skill) {
+		return userDao.getUsersBySkill(skill);
+	}
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -68,7 +69,7 @@ public class User {
 	@Column(unique=true)
 	private String email;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Skill> skills = new HashSet<Skill>();
 	
 	@NotNull
@@ -177,8 +178,8 @@ public class User {
 		return skills;
 	}
 
-	public void setSkills(Set<Skill> skills) {
-		this.skills = skills;
+	public void addSkill(Skill skill) {
+		this.skills.add(skill);
 	}
 	
 	public Date getdateOfBirth() {

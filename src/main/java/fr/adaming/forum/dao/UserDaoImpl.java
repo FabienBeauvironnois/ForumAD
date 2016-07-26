@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import fr.adaming.forum.entity.Address;
+import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
 
 @Component
@@ -67,6 +68,20 @@ public class UserDaoImpl implements IUserDao {
 		return user;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUsersBySkill(Skill skill) {
+		Query query = em.createQuery(
+				"FROM User u INNER JOIN u.skills s WHERE s.skillName LIKE :name AND s.skillLevel BETWEEN :level AND 5");
+
+		query.setParameter("name", skill.getSkillName());
+		query.setParameter("level", skill.getSkillLevel());
+		
+		List<User> result = query.getResultList();
+		log.info(result.size() + "utilisateur(s) ont été trouvé !");
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {

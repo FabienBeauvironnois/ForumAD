@@ -1,12 +1,11 @@
 package fr.adaming.forum.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -19,7 +18,6 @@ import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Role;
 import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
-import fr.adaming.forum.service.IAddressService;
 import fr.adaming.forum.service.ICompanyService;
 import fr.adaming.forum.service.IFormationService;
 import fr.adaming.forum.service.IRoleService;
@@ -56,7 +54,7 @@ public class UserServiceTest {
 		context.close();
 	}
 
-	
+	/*
 	@Test
 	public void testAddUser() {
 		
@@ -69,7 +67,8 @@ public class UserServiceTest {
 		Company company = new Company("Flander's", "Toulouse", address);
 		company = serviceCompany.addCompany(company);
 		User user = new User("Prenom", "Nom", address, company, role, "monemail@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
-		user.setSkills( new HashSet<Skill>());
+		user.addSkill( new Skill("OPM", 5));
+		
 		user = service.addUser(user);
 	
 		//User user2 = new User("Test multiUser in formation", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation);
@@ -142,6 +141,22 @@ public class UserServiceTest {
 			
 			System.out.println(list.size());
 			assertNotNull(list);
+		}
+		*/
+		
+		@Test
+		public void testGetUserBySkill() {
+			Skill skill = new Skill("JPA", 3);
+			
+			User user = defaultUserDB;
+			user.addSkill( skill );
+			user = service.updateUser(user);
+			
+			List<User> users1 = service.getUsersBySkill(new Skill("JPA", 2));
+			List<User> users2 = service.getUsersBySkill(new Skill("JPA", 5));
+			
+			assertTrue( users1.size()==1 && users2.size()==0);
+			
 		}
 	 
 	

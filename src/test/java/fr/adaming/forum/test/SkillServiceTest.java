@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.adaming.forum.entity.Skill;
-import fr.adaming.forum.entity.SkillLevel;
 import fr.adaming.forum.service.ISkillService;
 
 public class SkillServiceTest {
@@ -32,7 +31,7 @@ public class SkillServiceTest {
 
 	@Test
 	public void testAddSkill() {
-		Skill skill = new Skill("JavaEE", SkillLevel.three);
+		Skill skill = new Skill("JavaEE", 3);
 		service.addSkill(skill);
 	
 		assertNotNull(skill.getIdSkill());
@@ -40,7 +39,7 @@ public class SkillServiceTest {
 
 	@Test
 	public void testDeleteSkill(){
-		Skill skill = new Skill("JavaEE", SkillLevel.three);
+		Skill skill = new Skill("Python", 3);
 		skill = service.addSkill(skill);
 		
 		int sizeBefore = service.getAllSkills().size();
@@ -55,8 +54,8 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testGetSkillById(){
-		Skill skill = new Skill("JavaEE", SkillLevel.three);
-		service.addSkill(skill);
+		Skill skill = new Skill("JavaSE", 2);
+		skill = service.addSkill(skill);
 		skill = service.getSkillById(skill.getIdSkill());
 		
 		assertNotNull(skill);
@@ -70,7 +69,7 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testGetSkillByKeyword(){
-		Skill skill = new Skill("Python", SkillLevel.three);
+		Skill skill = new Skill("Python", 3);
 		service.addSkill(skill);
 		Collection<Skill> skillform = service.getSkillByKeyWord("Python");
 		
@@ -80,7 +79,7 @@ public class SkillServiceTest {
 	@Test
 	public void testUpdateSkill(){
 
-		Skill skill = new Skill("C++",SkillLevel.four);	
+		Skill skill = new Skill("C++", 3);	
 		skill = service.addSkill(skill);	
 
 		Skill s = service.getSkillById(skill.getIdSkill());
