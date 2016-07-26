@@ -66,7 +66,7 @@ public class UserServiceTest {
 		formation = serviceFormation.addFormation(formation);
 		//Formation formation = serviceFormation.getFormationById(1L);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		Company company = new Company("adaming", "Toulouse", address);
+		Company company = new Company("Flander's", "Toulouse", address);
 		company = serviceCompany.addCompany(company);
 		User user = new User("Prenom", "Nom", address, company, role, "monemail@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 		user.setSkills( new HashSet<Skill>());
@@ -90,7 +90,7 @@ public class UserServiceTest {
 		Formation formation = new Formation("C++", "Toulouse", new Date(), new Date(), true);
 		serviceFormation.addFormation(formation);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		Company company = new Company("adaming", "Toulouse", address);
+		Company company = new Company("adaming2", "Toulouse", address);
 		serviceCompany.addCompany(company);
 		User user = new User("MUST", "Die", address, company, role, "nothing@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 		user = service.addUser(user);
@@ -152,7 +152,7 @@ public class UserServiceTest {
 		Formation formation = new Formation("JBOSS", "Toulouse", new Date(), new Date(), true);
 		serviceFormation.addFormation(formation);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
-		Company company = new Company("adaming", "Toulouse", address);
+		Company company = new Company("Groupe Adaming", "Toulouse", address);
 		serviceCompany.addCompany(company);
 		return new User("FirstName", "Name", address, company, role, "email@email.fr", "unPassw0rd", formation, new java.sql.Date(0, 0, 0));
 	 }
