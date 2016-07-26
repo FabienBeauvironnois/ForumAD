@@ -2,6 +2,7 @@ package fr.adaming.forum.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class Comment {
 	@NotNull
 	private String corpus;
 	
-	@ManyToOne
+	@NotNull
+	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="idTopic")
 	private Topic topic;
 	
@@ -31,6 +33,15 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private User user;
+
+	public Comment(String corpus, User user, Topic topic) {
+		super();
+		this.corpus = corpus;
+		this.user = user;
+		Date utilDate = new Date();
+		this.sqlDate = new java.sql.Date(utilDate.getTime());
+		this.setTopic(topic);
+	}
 	
 	public Comment(String corpus, User user) {
 		super();
@@ -77,6 +88,9 @@ public class Comment {
 	}
 	
 	public void setTopic(Topic topic) {
+		if( !topic.getComments().contains(this) ){
+			topic.addComment(this);
+		}
 		this.topic = topic;
 	}
 		

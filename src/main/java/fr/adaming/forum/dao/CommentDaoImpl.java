@@ -48,7 +48,10 @@ public class CommentDaoImpl implements ICommentDao {
 	public Comment deleteComment(Long idComment) {
 		Comment comment = getCommentById(idComment);
 		if (comment != null) {
-			em.remove(comment);
+			//em.remove(comment);
+			Query q = em.createQuery("DELETE FROM Comment c WHERE c.idComment = :x");
+			q.setParameter("x", idComment);
+			q.executeUpdate();
 			log.info("Le commentaire " + comment.getIdComment() + " a bien été supprimé!");
 		}
 		return comment;

@@ -40,37 +40,44 @@ public class CommentServiceTest {
 	@Test
 	public void testAddComment() {
 		List<User> users = serviceUser.getAllUser();
-		Comment comment = new Comment("Ceci est un commentaire", users.get(1));
+		Comment comment = new Comment("Ceci est un commentaire", users.get(0));
 		
 		Topic topic = new Topic("TestAddComment", comment);
 		topic = serviceTopic.addTopic(topic);
+		
+		comment = new Comment("2ème commentaire", users.get(0), topic);
+		comment = service.addComment(comment);	
 				
-		assertNotNull( service.deleteComment(topic.getSubject().getIdComment()) ); //IL MENT!
+		assertNotNull( ( (Comment) serviceTopic.getTopicById(topic.getIdTopic()).getComments().toArray()[1]).getCorpus() );
 		
 	}
 	
-	/*
+	
 	@Test
 	public void testUpdateComment(){
-		Comment com = new Comment("Ceci est un commentaire", serviceTopic.getAllTopic().get(0), serviceUser.getAllUser().get(0));
+		Comment com = new Comment("Ceci est un commentaire", serviceUser.getAllUser().get(0), serviceTopic.getAllTopic().get(0));
+		
 		com = service.addComment(com);
 		com.setCorpus("Commentaire mis à jour");
 		service.updateComment(com);
 		
-	}*/
+	}
 	
-	/*
+	
 	@Test
 	public void testDeleteComment(){
+		Comment com = new Comment("Commentaire à supprimer", serviceUser.getAllUser().get(0), serviceTopic.getAllTopic().get(0));
+		com = service.addComment(com);
+		
 		List<Comment> listBefore = service.getAllComments();
 		int sizeBefore = listBefore.size();
-		Comment com = service.getAllComments().get(0);
-		service.deleteComment(com.getIdComment());
+				
+		com = service.deleteComment(com.getIdComment());
 		List<Comment> listAfter = service.getAllComments();
 		int sizeAfter = listAfter.size();
-		
+				
 		assertTrue(sizeAfter == sizeBefore -1);
 	}
-	*/
+	
 
 }

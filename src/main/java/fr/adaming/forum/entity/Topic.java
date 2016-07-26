@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Topic {
 	@JoinColumn(name="idComment")
 	private Comment subject;
 	
-	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy="topic", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	private Collection<Comment> comments = new HashSet<Comment>();
 		
 	@NotNull	
@@ -68,11 +69,6 @@ public class Topic {
 		return user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-
 	public Date getDate() {
 		return sqldate;
 	}
@@ -91,11 +87,14 @@ public class Topic {
 	}
 
 	public void addComment(Comment comment) {
-		if(comment.getTopic() != this){
+		if( !this.comments.contains(comment) ){
 			this.comments.add(comment);
+		}
+		if(comment.getTopic() != this){
 			comment.setTopic(this);
 		}
 	}
+	
 
 	public Comment getSubject() {
 		return subject;
