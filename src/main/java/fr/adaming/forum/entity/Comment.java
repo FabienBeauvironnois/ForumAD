@@ -74,7 +74,7 @@ public class Comment implements Comparable<Comment>{
 		this.corpus = corpus;
 	}
 
-	public java.sql.Timestamp geTimestamp() {
+	public java.sql.Timestamp getTimestamp() {
 		return timestamp;
 	}
 
@@ -102,10 +102,11 @@ public class Comment implements Comparable<Comment>{
 	@Override
 	public int compareTo(Comment o) {
 		//return o.getDate().compareTo( this.getDate() );
-		if(this.equals(o)){
-			return 0;
+
+		if( this.equals(o) || this.timestamp == null){
+			return this.equals(o) ? 0 : 1 ;
 		}
-		if( this.geTimestamp().compareTo(o.geTimestamp())>=0 ){
+		if( this.timestamp.compareTo(o.timestamp)>=0 ){
 			return 1;
 		}
 		return -1;

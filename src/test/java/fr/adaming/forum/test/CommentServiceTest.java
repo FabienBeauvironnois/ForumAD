@@ -64,7 +64,7 @@ public class CommentServiceTest {
 		
 	}
 	
-	/*
+	
 	@Test
 	public void testUpdateComment(){
 		Comment com = new Comment("Ceci est un commentaire", serviceUser.getAllUser().get(0), serviceTopic.getAllTopic().get(0));
@@ -90,6 +90,5 @@ public class CommentServiceTest {
 				
 		assertTrue(sizeAfter == sizeBefore -1);
 	}
-	*/
 
 }
