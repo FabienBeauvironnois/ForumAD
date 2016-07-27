@@ -11,7 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.adaming.forum.entity.Address;
 import fr.adaming.forum.entity.Company;
-import fr.adaming.forum.service.IAddressService;
 import fr.adaming.forum.service.ICompanyService;
 
 public class CompanyServiceTest {
@@ -35,12 +34,12 @@ public class CompanyServiceTest {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
 		Company company = new Company("Adaming", "", address);
 		company = companyService.addCompany(company);
-
+		
 		assertNotNull(company);
 		
 	}
 	
-	
+	/*
 	@Test
 	public void testGetCompanyById() {
 		Address address = new Address(5, "rue Bidon", 31600, "Bidonville", "Bidonland");
@@ -117,6 +116,6 @@ public class CompanyServiceTest {
 		System.out.println(list.size());
 		assertNotNull(list);
 	}
-		
+	*/	
 	
 }

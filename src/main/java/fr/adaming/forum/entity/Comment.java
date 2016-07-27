@@ -1,5 +1,8 @@
 package fr.adaming.forum.entity;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -14,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,12 +27,12 @@ public class Comment {
 	private String corpus;
 	
 	@NotNull
-	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name="idTopic")
 	private Topic topic;
 	
 	@NotNull
-	private java.sql.Date sqlDate;
+	private java.sql.Timestamp timestamp;
 	
 	@NotNull
 	@ManyToOne
@@ -40,8 +43,7 @@ public class Comment {
 		super();
 		this.corpus = corpus;
 		this.user = user;
-		Date utilDate = new Date();
-		this.sqlDate = new java.sql.Date(utilDate.getTime());
+		this.timestamp = new java.sql.Timestamp( (new Date()).getTime());
 		this.setTopic(topic);
 	}
 	
@@ -49,8 +51,7 @@ public class Comment {
 		super();
 		this.corpus = corpus;
 		this.user = user;
-		Date utilDate = new Date();
-		this.sqlDate = new java.sql.Date(utilDate.getTime());
+		this.timestamp = new java.sql.Timestamp( (new Date()).getTime() );
 	}	
 
 	public Comment() {
@@ -73,12 +74,12 @@ public class Comment {
 		this.corpus = corpus;
 	}
 
-	public java.sql.Date getDate() {
-		return sqlDate;
+	public java.sql.Timestamp getTimestamp() {
+		return timestamp;
 	}
 
-	public void setDate(java.sql.Date date) {
-		this.sqlDate = date;
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public Long getIdComment() {
@@ -90,10 +91,25 @@ public class Comment {
 	}
 	
 	public void setTopic(Topic topic) {
-		if( !topic.getComments().contains(this) ){
+		if( topic.getComments().contains(this)){
+			this.topic = topic;
+		}else{
 			topic.addComment(this);
 		}
-		this.topic = topic;
 	}
-		
+	
+	
+	@Override
+	public int compareTo(Comment o) {
+		//return o.getDate().compareTo( this.getDate() );
+
+		if( this.equals(o) || this.timestamp == null){
+			return this.equals(o) ? 0 : 1 ;
+		}
+		if( this.timestamp.compareTo(o.timestamp)>=0 ){
+			return 1;
+		}
+		return -1;
+	}
+
 }

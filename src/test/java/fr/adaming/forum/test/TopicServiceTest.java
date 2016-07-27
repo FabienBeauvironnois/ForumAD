@@ -3,6 +3,8 @@ package fr.adaming.forum.test;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -47,7 +49,7 @@ public class TopicServiceTest {
 		assertNotNull(topic);
 		
 	}
-	/*
+	
 	@Test
 	public void testDeleteTopic(){
 		List<Topic> listBefore = topicService.getAllTopic();
@@ -65,15 +67,15 @@ public class TopicServiceTest {
 		assertNotNull(topicList);
 	}
 	
-	*/
-	/*
+	
+	
 	@Test
 	public void testGetTopicById(){
 		Topic topic = topicService.getTopicById(1L);
 		
 		assertNotNull(topic);
 	}
-/*
+
 	@Test
 	public void testUpdateTopic(){
 		
@@ -84,11 +86,11 @@ public class TopicServiceTest {
 		
 		assertFalse(topic.equals(topicUpdate));
 	}
-	*/
-/*	@Test
+	
+	@Test
 	public void testGetTopicByKeyword(){
 		List<Topic> topic = topicService.getTopicByKeyWord("Update");
 		assertFalse(topic.isEmpty());
 		System.out.println(topic);
-		}*/
+		}
 }
