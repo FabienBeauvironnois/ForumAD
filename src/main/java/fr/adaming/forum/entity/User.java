@@ -99,7 +99,6 @@ public class User {
 		this.password = password;
 		this.formation = formation;
 		this.dateOfBirth = dateOfBirth;
-		
 	}
 
 	public User() {

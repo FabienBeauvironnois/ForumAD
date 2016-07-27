@@ -6,7 +6,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(
 		uniqueConstraints={
-		@UniqueConstraint(name="company", columnNames={"companyName", "companyBranch"})
+		@UniqueConstraint(name="company", columnNames={"companyName", "companyBranch"}),
+		@UniqueConstraint(name="company_address", columnNames={"companyName", "streetName", "zipCode", "city", "country"})
+		//TODO a tester
 		})
 public class Company {
 
