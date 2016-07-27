@@ -23,8 +23,15 @@ public class SkillDaoImpl implements ISkillDao {
 
 	@Override
 	public Skill addSkill(Skill skill) {
-		em.persist(skill);
-		log.info("La compétence " + skill.getSkillName() + " a bien été ajoutée");
+//		if (skill.getIdSkill() == null){
+			em.persist(skill);
+			log.info("La compétence " + skill.getSkillName() + " a bien été ajoutée");
+//		}
+//		else {
+//			em.merge(skill);
+//			log.info("La compétence " + skill.getSkillName() + " a bien été mergée");
+//		}
+		
 		return skill;
 	}
 
