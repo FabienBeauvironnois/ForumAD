@@ -80,7 +80,7 @@ public class User {
 	@Column(unique=true)
 	private String email;
 	
-	@ManyToMany(cascade=CascadeType.MERGE,  fetch=FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.MERGE, CascadeType.REFRESH} ,  fetch=FetchType.EAGER)
 	@JoinTable(
 	            name="user_skills",
 	            joinColumns = @JoinColumn(referencedColumnName="idUser"),

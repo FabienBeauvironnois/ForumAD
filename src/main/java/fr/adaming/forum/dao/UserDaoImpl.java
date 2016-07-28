@@ -53,7 +53,8 @@ public class UserDaoImpl implements IUserDao {
 			}
 		}
 		
-		return user;
+		return em.find(User.class, user.getIdUser());
+//		return user;
 	}
 
 	/*
