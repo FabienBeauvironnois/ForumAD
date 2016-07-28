@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /*
  * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M@author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
  * Classe permettant de générer les commentaires ainsi que le sujet principal du topic.
@@ -29,6 +31,7 @@ public class Comment implements Comparable<Comment>{
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idTopic")
+	@JsonBackReference
 	private Topic topic;
 	
 	@NotNull
@@ -37,6 +40,7 @@ public class Comment implements Comparable<Comment>{
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idUser")
+	@JsonBackReference
 	private User user;
 
 	public Comment(String corpus, User user, Topic topic) {

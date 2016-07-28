@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /*
  * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
  * Différentes formations réalisées par l'utilisateur via adaming.
@@ -56,7 +58,8 @@ public class Formation {
 	/*
 	 * Comme on a un Entity Manager et non pas un Session factory, on met un Fetch Eager pour récupérer tous les élèves de la formation
 	 */
-	@OneToMany(mappedBy="formation", fetch=FetchType.EAGER) 
+	@OneToMany(mappedBy="formation", fetch=FetchType.EAGER)
+	@JsonManagedReference
 	private Set<User> user = new HashSet<User>();
 
 	public Formation() {

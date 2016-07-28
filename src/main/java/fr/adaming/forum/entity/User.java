@@ -23,6 +23,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /*
  * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
  * L'utilisateur est toute personne qui va utiliser l'application.
@@ -57,6 +59,7 @@ public class User {
 	
 	@ManyToOne
 	@JoinColumn(name="idCompany")
+	@JsonBackReference
 	private Company company;
 	
 	/**
@@ -66,6 +69,7 @@ public class User {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idRole")
+	@JsonBackReference
 	private Role role;
 	
 	@NotNull
@@ -97,6 +101,7 @@ public class User {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="idFormation")
+	@JsonBackReference
 	private Formation formation; 
 
 	public User(String firstName, String name, Address personalAddress, Company company, Role role, String email,
