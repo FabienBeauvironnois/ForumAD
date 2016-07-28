@@ -188,6 +188,13 @@ public class User {
 		this.skills.add(skill);
 	}
 	
+	/*
+	 * WARNING source de bug : manque orphanremoval
+	 */
+	public void removeSkill(Skill skill) {
+		this.skills.remove(skill);
+	}
+	
 	public Date getdateOfBirth() {
 		return dateOfBirth;
 	}

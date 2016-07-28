@@ -48,7 +48,7 @@ public class SkillServiceTest {
 		
 		assertNotNull(skill);
 		assertTrue( service.getSkillById(skill.getIdSkill()) == null );
-		assert(sizeBefore == sizeAfter+1);
+		assertTrue(sizeBefore == sizeAfter+1);
 	}
 		
 	
@@ -69,7 +69,7 @@ public class SkillServiceTest {
 	
 	@Test
 	public void testGetSkillByKeyword(){
-		Skill skill = new Skill("Python", 3);
+		Skill skill = new Skill("Python", 2);
 		service.addSkill(skill);
 		Collection<Skill> skillform = service.getSkillByKeyWord("Python");
 		

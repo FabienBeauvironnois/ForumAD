@@ -1,6 +1,7 @@
 package fr.adaming.forum.dao;
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -29,20 +30,50 @@ public class UserDaoImpl implements IUserDao {
 		return user;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.adaming.forum.dao.IUserDao#updateUser(fr.adaming.forum.entity.User)
+	 * NOTE contiens un orphanRemoval
+	 */
 	@Override
 	public User updateUser(User user) {
+		
+		//Récupérer les skills non-supprimés
+		User oldUser = em.find(User.class, user.getIdUser());
+		Set<Skill> skills = oldUser.getSkills();
+		skills.removeAll(user.getSkills());
+		
 		em.merge(user);
-
 		log.info("L'utilisateur " + user.getIdUser() + " à bien été modifié !");
+		
+		//Supprimer tous les skill orphelins
+		for(Skill s : skills){
+			if(getUsersBySkill(s).isEmpty()){
+				em.remove(s);
+			}
+		}
+		
 		return user;
 	}
 
+	/*
+	 * NOTE contiens un orphanRemoval (pas possible via annotations)
+	 */
 	@Override
 	public User deleteUser(Long idUser) {
 		User user = em.find(User.class, idUser);
 		if (user != null) {
+
+			Set<Skill> skills = user.getSkills();
 			em.remove(user);
 			log.info("L'utilisateur " + user.getIdUser() + " à bien été supprimé !");
+			
+			for(Skill s : skills){
+				if(getUsersBySkill(s).isEmpty()){
+					em.remove(s);
+				}
+			}
+			
 		}
 		return user;
 	}
