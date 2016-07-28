@@ -77,7 +77,7 @@ public class UserServiceTest {
 		User user = new User("Prenom", "Nom", address, company, role, "monemail@email.fr", "unPassw0rd",
 				defaultUserDB.getFormation(), new java.sql.Date(0, 0, 0));
 		Skill skill = new Skill("OPM", 5);
-		//skill = serviceSkill.addSkill(skill);
+		skill = serviceSkill.addSkill(skill);
 		user.addSkill(skill);
 		user = service.addUser(user);
 
@@ -97,6 +97,7 @@ public class UserServiceTest {
 	public void testAddSkillToUser() {
 
 		// Préparation des données nécessaires au test
+		//Ajout de 2 users
 		User user = createDefaultUser();
 		user.setFirstName("User1");
 		user.setEmail("User1@email.com");
@@ -106,16 +107,18 @@ public class UserServiceTest {
 		user = service.addUser(user);
 		user2 = service.addUser(user2);
 
+		//Vérification de skill vide / suppression des skill concernés
 		Skill skill = new Skill("TestAddSkillToUser", 3);
 		user.removeSkill(skill);
 		user2.removeSkill(skill);
 		user = service.updateUser(user);
 		user2 = service.updateUser(user2);
+		Collection<Skill> skills = serviceSkill.getSkillByKeyWord(skill.getSkillName());
+		for (Skill s : skills) {
+			serviceSkill.deleteSkill(s.getIdSkill());
+		}
+		skill = serviceSkill.addSkill(skill);
 		
-//		Collection<Skill> skills = serviceSkill.getSkillByKeyWord(skill.getSkillName());
-//		for (Skill s : skills) {
-//			serviceSkill.deleteSkill(s.getIdSkill());
-//		}
 		
 		//Début du test
 		
@@ -140,9 +143,9 @@ public class UserServiceTest {
 		user = service.deleteUser(user.getIdUser());
 		assertTrue("Le skill n'est plus lié à User2", !user2.getSkills().isEmpty());
 
-		// Test du orphanRemoval
+		// Nettoyage BDD
 		user2 = service.deleteUser(user2.getIdUser());
-		assertTrue("Le skill orphelin n'a pas été supprimé", serviceSkill.getSkillById(skill.getIdSkill()) == null);
+		serviceSkill.deleteSkill(skill.getIdSkill());
 
 	}
 
@@ -223,9 +226,10 @@ public class UserServiceTest {
 		for (Skill s : user.getSkills()) {
 			user.removeSkill(s);
 		}
-		service.updateUser(user);
+		user = service.updateUser(user);
 
 		Skill skill = new Skill("JPA", 3);
+		skill = serviceSkill.addSkill(skill);
 		user.addSkill(skill);
 		user = service.updateUser(user);
 
@@ -234,10 +238,12 @@ public class UserServiceTest {
 
 		assertTrue(users1.size() == 1 && users2.size() == 0);
 
+		//Nettoyage de la base
 		for (Skill s : user.getSkills()) {
 			user.removeSkill(s);
 		}
 		defaultUserDB = service.updateUser(user);
+		serviceSkill.deleteSkill(skill.getIdSkill());
 	}
 
 	

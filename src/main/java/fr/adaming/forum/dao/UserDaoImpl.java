@@ -33,22 +33,9 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public User updateUser(User user) {
-		
-		//Récupérer les skills non-supprimés
-		User oldUser = em.find(User.class, user.getIdUser());
-		Set<Skill> skills = oldUser.getSkills();
-		skills.removeAll(user.getSkills());
-		
+				
 		em.merge(user);
 		log.info("L'utilisateur " + user.getIdUser() + " à bien été modifié !");
-		
-		//Supprimer tous les skill orphelins
-		for(Skill s : skills){
-			System.out.println( s.getSkillName() + " - " + s.getSkillLevel());
-			if(getUsersBySkill(s).isEmpty()){
-				em.remove(s);
-			}
-		}
 		
 		return em.find(User.class, user.getIdUser());
 //		return user;
@@ -60,16 +47,8 @@ public class UserDaoImpl implements IUserDao {
 		User user = em.find(User.class, idUser);
 		if (user != null) {
 
-			Set<Skill> skills = user.getSkills();
 			em.remove(user);
 			log.info("L'utilisateur " + user.getIdUser() + " à bien été supprimé !");
-			
-			for(Skill s : skills){
-				System.out.println( s.getSkillName() + " - " + s.getSkillLevel());
-				if(getUsersBySkill(s).isEmpty()){
-					em.remove(s);
-				}
-			}
 			
 		}
 		return user;
