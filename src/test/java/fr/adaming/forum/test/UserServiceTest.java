@@ -110,8 +110,8 @@ public class UserServiceTest {
 		
 		// On teste la persistence du skill malgré la délétion d'un des deux utilisateurs liés.
 		
-		assertNotNull(user.getName());
-		service.deleteUser(user.getIdUser());
+//		assertNotNull(user.getName());
+//		service.deleteUser(user.getIdUser());
 //		User user2 = service.getAllUser().get(0);
 //		service.deleteUser(user2.getIdUser());
 		
