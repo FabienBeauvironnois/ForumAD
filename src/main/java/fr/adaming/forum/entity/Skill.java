@@ -15,6 +15,12 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Les différentes compétences qui ont pu être acquises par l'utilisateur au cours et hors formation.
+ * Ces compétences sont notées selon 5 niveaux (1 à 5) 1 étant débutant et 5 expert. 
+ */
+
 @Entity
 @Table(
 		uniqueConstraints={

@@ -1,20 +1,20 @@
 package fr.adaming.forum.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Comparator;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M@author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Classe permettant de générer les commentaires ainsi que le sujet principal du topic.
+ */
 
 @Entity
 public class Comment implements Comparable<Comment>{
@@ -98,6 +98,9 @@ public class Comment implements Comparable<Comment>{
 		}
 	}
 	
+	/*
+	 * TODO A quoi sert la fonction ici ...
+	 */
 	
 	@Override
 	public int compareTo(Comment o) {

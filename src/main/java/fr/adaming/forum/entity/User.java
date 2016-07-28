@@ -23,6 +23,11 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * L'utilisateur est toute personne qui va utiliser l'application.
+ */
+
 @Entity
 @Table(
 uniqueConstraints={
