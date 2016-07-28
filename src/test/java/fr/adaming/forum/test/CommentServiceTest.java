@@ -47,13 +47,13 @@ public class CommentServiceTest {
 		
 		String c0 = ( (Comment) serviceTopic.getTopicById(topic.getIdTopic()).getComments().toArray()[0]).getCorpus();
 		
-		comment = service.addComment(new Comment("1er commentaire", users.get(0), topic));	
+		Comment comment1 = service.addComment(new Comment("1er commentaire", users.get(0), topic));	
 
 		System.out.println(serviceTopic.getTopicById(topic.getIdTopic()).getComments().size());
 		
 		String c1 = ( (Comment) serviceTopic.getTopicById(topic.getIdTopic()).getComments().toArray()[1]).getCorpus();
 		
-		comment = service.addComment(new Comment("2nd commentaire", users.get(0), topic));	
+		Comment comment2 = service.addComment(new Comment("2nd commentaire", users.get(0), topic));	
 		
 		String c2 = ( (Comment) serviceTopic.getTopicById(topic.getIdTopic()).getComments().toArray()[2]).getCorpus();
 				
@@ -62,9 +62,13 @@ public class CommentServiceTest {
 		
 		assertNotNull( serviceTopic.getTopicById(topic.getIdTopic()).getComments().size() == 3 );
 		
+		// Test de la deletion d'un ou des deux commentaires du topic récemment créé
+		
+		service.deleteComment(comment1.getIdComment());
+		service.deleteComment(comment2.getIdComment());
 	}
 	
-	
+/*	
 	@Test
 	public void testUpdateComment(){
 		Comment com = new Comment("Ceci est un commentaire", serviceUser.getAllUser().get(0), serviceTopic.getAllTopic().get(0));
@@ -90,5 +94,5 @@ public class CommentServiceTest {
 				
 		assertTrue(sizeAfter == sizeBefore -1);
 	}
-
+*/
 }

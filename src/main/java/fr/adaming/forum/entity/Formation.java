@@ -1,11 +1,9 @@
 package fr.adaming.forum.entity;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +15,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Différentes formations réalisées par l'utilisateur via adaming.
+ * A priori une seule par utilisateur mais ne sait-on jamais.
+ * La liste des formations sera à gérer par l'administrateur du forum (ou via un logiciel interne à l'entreprise qui pourrait communiquer avec.
+ * Chaque formation a une date de début et une date de fin pour pouvoir différencier les différentes "promotions".
+ * 
+ */
 
 @Entity
 @Table(
@@ -46,7 +55,11 @@ public class Formation {
 	@NotNull
 	private boolean processing;
 	
+	/*
+	 * Comme on a un Entity Manager et non pas un Session factory, on met un Fetch Eager pour récupérer tous les élèves de la formation
+	 */
 	@OneToMany(mappedBy="formation", fetch=FetchType.EAGER)
+	@JsonManagedReference
 	private Set<User> user = new HashSet<User>();
 
 	public Formation() {
@@ -113,9 +126,5 @@ public class Formation {
 	public void setUsers(Set<User> user) {
 		this.user = user;
 	}
-	
-	
-	
-	
 
 }

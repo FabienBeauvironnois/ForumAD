@@ -2,6 +2,13 @@ package fr.adaming.forum.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Classe de création des objets Company permettant de lier un user à une entreprise au sein de laquelle il travaille. 
+ * Un historique des companies au sein desquelles l'utilisateur a travaillé est à envisager.
+ * Ajout de contraintes d'unicité pour ne pas avoir deux companies à la même adresse ni deux branches identiques
+ * de la même companie.
+ */
 
 @Entity
 @Table(
@@ -19,6 +26,12 @@ public class Company {
 	@NotNull
 	private String companyName;
 
+	/*
+	 * Utilisée si il y a plusieurs antennes de la companie:
+	 * Exemple 1 : Paris - Toulouse - Lyon ...
+	 * Exemple 2 : Toulouse 1 - Toulouse 2 ...
+	 */
+	
 	@NotNull
 	private String companyBranch;
 

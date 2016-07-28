@@ -91,6 +91,7 @@ public class UserServiceTest {
 
 		assertNotNull(user.getName());
 		service.deleteUser(user.getIdUser());
+
 	}
 
 

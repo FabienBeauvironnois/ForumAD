@@ -1,32 +1,32 @@
 package fr.adaming.forum.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Formula;
-
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Address est un composant et non pas une entity
+ * Elle est un composant de company et de User d'où le Embeddable.
+ */
 @Embeddable
 public class Address implements Serializable {
 		
 	
+	/**
+	 * Default Generated.
+	 */
+	private static final long serialVersionUID = -8841800640695855559L;
+
 	private Integer streetNumber;
 	
 	@NotNull //Ne fonctionne pas avec Embedded : définir nullable=false dans les entités l'incluant
 	private String streetName;
+	
+	/*
+	 * On met des Wrapper et non pas les types simples (int) pour avoir un null = NULL et non pas = 0
+	 */
 	
 	@NotNull
 	private Integer zipCode;
@@ -90,6 +90,4 @@ public class Address implements Serializable {
 		this.country = country;
 	}
 	
-	
-
 }

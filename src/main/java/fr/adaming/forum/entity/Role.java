@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
  * Cette classe défini les différents roles possibles pour les utilisateurs.
  * C'est une classe à part pour permettre la modification et création des roles.
+ * Ces rôles peuvent être : Admin, moderateur, user par exemple ... 
  *
  */
 
@@ -45,6 +46,4 @@ public class Role {
 		return idRole;
 	}
 	
-	
-
 }

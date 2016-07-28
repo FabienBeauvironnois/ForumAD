@@ -1,12 +1,6 @@
 package fr.adaming.forum.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -20,13 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+/*
+ * @author Alonzo.M, Beauvironnois.F, Bonnecaze.K, Roblin.M
+ * Création d'un nouveau topic qui doit obligatoirement contenir un sujet qui est créé via la classe commentaire. 
+ * Un topic doit forcément contenir 1 sujet, si on delete le topic, on delete tous les commentaires qui lui sont liés.
+ */
+@SuppressWarnings("deprecation")
 @Entity
 public class Topic {
 
@@ -40,6 +41,7 @@ public class Topic {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "idUser")
+	@JsonBackReference
 	private User user;
 
 	// REMARQUE le sujet est également contenu dans la liste des commentaires
@@ -49,6 +51,7 @@ public class Topic {
 
 	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@Sort(type=SortType.NATURAL)
+	@JsonManagedReference
 	private SortedSet<Comment> comments = new TreeSet<Comment>();
 
 	@NotNull
@@ -99,8 +102,8 @@ public class Topic {
 	public boolean addComment(Comment comment) {
 		
 		boolean add = comments.add(comment);
-		boolean contain = comments.contains(comment);
-		int commentsSize = comments.size();
+	//	boolean contain = comments.contains(comment);
+	//	int commentsSize = comments.size();
 		if( add ){
 			comment.setTopic(this);
 			return true;

@@ -38,13 +38,13 @@ public class TopicServiceTest {
 	public void testAddTopic(){
 		User user = userService.getAllUser().get(0);
 		//user = userService.addUser(user);
-		Comment comment = new Comment("Ceci est un commentaire", user);
+		Comment sujet = new Comment("Ceci est le sujet du topic", user);
 		
-		Topic topic = new Topic("test", comment);
+		Topic topic = new Topic("test", sujet);
 		topic = topicService.addTopic(topic);
 		
-		comment = (Comment) topic.getComments().toArray()[0];
-		System.out.println(comment.getCorpus());
+		sujet = (Comment) topic.getComments().toArray()[0];
+		System.out.println(sujet.getCorpus());
 		
 		assertNotNull(topic);
 		
@@ -59,7 +59,7 @@ public class TopicServiceTest {
 		
 		assertTrue(listAfter.size() == (listBefore.size()-1));
 	}
-	
+	/*
 	@Test
 	public void testGetAllTopics(){
 		List<Topic> topicList = topicService.getAllTopic();
@@ -92,5 +92,5 @@ public class TopicServiceTest {
 		List<Topic> topic = topicService.getTopicByKeyWord("Update");
 		assertFalse(topic.isEmpty());
 		System.out.println(topic);
-		}
+		}*/
 }
