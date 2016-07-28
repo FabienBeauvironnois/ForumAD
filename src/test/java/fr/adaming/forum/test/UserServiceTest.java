@@ -247,7 +247,7 @@ public class UserServiceTest {
 	}
 
 	
-	@SuppressWarnings("deprecation")
+
 	public static User createDefaultUser() {
 		Role role;
 		Formation formation;
