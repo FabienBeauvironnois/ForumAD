@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
+import fr.adaming.forum.entity.Role;
 import fr.adaming.forum.entity.Topic;
 
 @Component
@@ -32,7 +33,7 @@ public class TopicDaoImpl implements ITopicDao {
 		em.merge(topic);
 
 		log.info("Le topic " + topic.getIdTopic() + " a bien été modifié !");
-		return topic;
+		return em.find(Topic.class, topic.getIdTopic());
 	}
 
 	@Override

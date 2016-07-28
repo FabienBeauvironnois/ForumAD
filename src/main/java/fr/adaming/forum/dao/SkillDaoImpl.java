@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
+import fr.adaming.forum.entity.Role;
 import fr.adaming.forum.entity.Skill;
 
 @Component
@@ -49,7 +50,7 @@ public class SkillDaoImpl implements ISkillDao {
 	public Skill updateSkill(Skill skill) {
 		em.merge(skill);
 		log.info("La compétence " + skill.getSkillName() + " a été mise à jour!");
-		return skill;
+		return em.find(Skill.class, skill.getIdSkill());
 	}
 
 	@Override

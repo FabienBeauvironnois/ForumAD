@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
+import fr.adaming.forum.entity.Company;
 import fr.adaming.forum.entity.Formation;
 
 @Component
@@ -41,7 +42,7 @@ public class FormationDaoImpl implements IFormationDao {
 	public Formation updateFormation(Formation formation) {
 		em.merge(formation);
 		log.info("La formation " + formation + " a été modifiée");
-		return formation;
+		return em.find(Formation.class, formation.getIdFormation());
 
 	}
 

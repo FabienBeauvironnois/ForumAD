@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import fr.adaming.forum.entity.Comment;
+import fr.adaming.forum.entity.User;
 
 @Component
 public class CommentDaoImpl implements ICommentDao {
@@ -41,7 +42,7 @@ public class CommentDaoImpl implements ICommentDao {
 	public Comment updateComment(Comment comment) {
 		em.merge(comment);
 		log.info("Le commentaire " + comment.getIdComment() + " a bien été mis à jour!");
-		return comment;
+		return em.find(Comment.class, comment.getIdComment());
 	}
 
 	@Override

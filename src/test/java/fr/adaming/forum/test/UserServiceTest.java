@@ -77,8 +77,8 @@ public class UserServiceTest {
 		User user = new User("Prenom", "Nom", address, company, role, "monemail@email.fr", "unPassw0rd",
 				defaultUserDB.getFormation(), new java.sql.Date(0, 0, 0));
 		Skill skill = new Skill("OPM", 5);
+		//skill = serviceSkill.addSkill(skill);
 		user.addSkill(skill);
-		serviceSkill.addSkill(skill);
 		user = service.addUser(user);
 
 		// User user2 = new User("Test multiUser in formation", "Name", address,
@@ -107,14 +107,18 @@ public class UserServiceTest {
 		user2 = service.addUser(user2);
 
 		Skill skill = new Skill("TestAddSkillToUser", 3);
-		Collection<Skill> skills = serviceSkill.getSkillByKeyWord(skill.getSkillName());
-		for (Skill s : skills) {
-			serviceSkill.deleteSkill(s.getIdSkill());
-		}
-		skill = serviceSkill.addSkill(skill);
 		user.removeSkill(skill);
 		user2.removeSkill(skill);
-
+		user = service.updateUser(user);
+		user2 = service.updateUser(user2);
+		
+//		Collection<Skill> skills = serviceSkill.getSkillByKeyWord(skill.getSkillName());
+//		for (Skill s : skills) {
+//			serviceSkill.deleteSkill(s.getIdSkill());
+//		}
+		
+		//Début du test
+		
 		user.addSkill(skill);
 		System.out.println("Le skill " + user.getSkills().toArray()[0] + " a bien été rajouté à l'utilisateur n° "
 				+ user.getIdUser());
@@ -233,7 +237,7 @@ public class UserServiceTest {
 		for (Skill s : user.getSkills()) {
 			user.removeSkill(s);
 		}
-		service.updateUser(user);
+		defaultUserDB = service.updateUser(user);
 	}
 
 	

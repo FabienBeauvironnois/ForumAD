@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import fr.adaming.forum.entity.Address;
+import fr.adaming.forum.entity.Company;
 import fr.adaming.forum.entity.Formation;
 import fr.adaming.forum.entity.Role;
 
@@ -34,7 +35,7 @@ public class RoleDaoImpl implements IRoleDao {
 		em.merge(role);
 
 		log.info("Le role " + role.getIdRole() + " a bien été modifié !");
-		return role;
+		return em.find(Role.class, role.getIdRole());
 	}
 
 	@Override

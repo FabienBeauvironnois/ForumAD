@@ -32,7 +32,7 @@ public class CompanyDaoImpl implements ICompanyDao {
 	public Company updateCompany(Company company) {
 		em.merge(company);
 		log.info("La société " + company.getCompanyName() + " à été mis à jour");
-		return company;
+		return em.find(Company.class, company.getIdCompany());
 	}
 
 	@Override

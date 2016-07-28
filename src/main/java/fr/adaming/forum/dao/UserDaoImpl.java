@@ -30,11 +30,7 @@ public class UserDaoImpl implements IUserDao {
 		return user;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see fr.adaming.forum.dao.IUserDao#updateUser(fr.adaming.forum.entity.User)
-	 * NOTE contiens un orphanRemoval
-	 */
+
 	@Override
 	public User updateUser(User user) {
 		
@@ -48,6 +44,7 @@ public class UserDaoImpl implements IUserDao {
 		
 		//Supprimer tous les skill orphelins
 		for(Skill s : skills){
+			System.out.println( s.getSkillName() + " - " + s.getSkillLevel());
 			if(getUsersBySkill(s).isEmpty()){
 				em.remove(s);
 			}
@@ -57,9 +54,7 @@ public class UserDaoImpl implements IUserDao {
 //		return user;
 	}
 
-	/*
-	 * NOTE contiens un orphanRemoval (pas possible via annotations)
-	 */
+
 	@Override
 	public User deleteUser(Long idUser) {
 		User user = em.find(User.class, idUser);
@@ -70,6 +65,7 @@ public class UserDaoImpl implements IUserDao {
 			log.info("L'utilisateur " + user.getIdUser() + " à bien été supprimé !");
 			
 			for(Skill s : skills){
+				System.out.println( s.getSkillName() + " - " + s.getSkillLevel());
 				if(getUsersBySkill(s).isEmpty()){
 					em.remove(s);
 				}
