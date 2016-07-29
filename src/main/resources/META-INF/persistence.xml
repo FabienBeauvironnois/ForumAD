@@ -19,7 +19,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/forumdb"/>
 <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-<property name="hibernate.hbm2ddl.auto" value="create" />
+<property name="hibernate.hbm2ddl.auto" value="update" />
 
 <!-- validate: validate the schema, makes no changes to the database.
 	 update: update the schema.

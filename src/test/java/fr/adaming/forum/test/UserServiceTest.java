@@ -69,7 +69,7 @@ public class UserServiceTest {
 	@Test
 	public void testAddUser() {
 
-		Role role = new Role("Admin");
+		Role role = new Role("AddUser");
 		role = serviceRole.addRole(role);
 		Address address = new Address(15, "toto", 31000, "Toulouse", "France");
 		Company company = new Company("Flander's", "Toulouse", address);

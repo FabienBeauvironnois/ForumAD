@@ -31,10 +31,11 @@ public class RoleServiceTest {
 
 	@Test
 	public void testAddRole() {
-		Role role = new Role("Admin");
-		service.addRole(role);
+		Role role = new Role("AddRole");
+		role = service.addRole(role);
 
 		assertNotNull(role.getIdRole());
+		service.deleteRole(role.getIdRole());
 	}
 
 	@Test
@@ -48,10 +49,10 @@ public class RoleServiceTest {
 
 	@Test
 	public void testUpdateRole() {
-		Role role = new Role("Moderator");
+		Role role = new Role("Update1");
 		role = service.addRole(role);
 		Role updatedRole = service.getRoleById(role.getIdRole());
-		updatedRole.setStatus("Master");
+		updatedRole.setStatus("Update2");
 		service.updateRole(updatedRole);
 
 		assertFalse(role.equals(updatedRole));
