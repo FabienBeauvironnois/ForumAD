@@ -1,0 +1,58 @@
+PROJET DE FORUM ADAMING
+
+#### Intro ####
+
+Ce projet a pour but de réaliser un forum à destination des ingénieurs formés à Adaming afin de faciliter leur communication.
+Principales fonctionnalités :
+- échange d'informations via des topics et des commentaires
+- recherche d'ingénieurs selon différents critères (companie/client actuel, formation, compétence, adresse)
+- recherche d'entreprises clientes par nom ou par adresse
+- gestion des données par l'administrateur 
+- gestion "automatique" de la cohérence des données (suppression des entités orphelines si nécessaire, bloquage des doublons)
+
+
+#### Détail des entités/objets ####
+
+---- Address ---
+Une adresse est incluse (Embeddable) dans User ou dans Company et ne peut être modifiée que via ces entités.
+
+---- Company ----
+Les entreprises doivent être gérées par l'administrateur (ajout, suppression, modification)
+Un objet Company doit avoir une et une seule adresse, mais plusieurs entreprises peuvent avoir la même adresse (ex : aeropole)
+
+---- Role ---
+Le rôle défini le niveau d'accès des utilisateurs aux méthodes (préparation pour spring-security) 
+
+---- Formation ----
+Les formations doivent être gérées par l'administrateur (ajout, suppression, modification).
+Chaque formation ne peut pas avoir le même ensemble nom-ville-dateDebut-dateFin
+
+---- Skill ----
+Les compétences doivent être gérées par l'administrateur (ajout, suppression, modification).
+
+---- User ----
+Un utilisateur peut être recherché par compétence (de niveau x ou plus), par adresse ou par mot-clé.
+Les adresses mail doivent être uniques.
+
+---- Topic ----
+Un topic doit être créé avec un premier commentaire (sujet du post) qui ne peut être supprimé sans supprimer tout le topic.
+La création du premier commentaire se fait via le topic.
+La recherche du topic peut se faire par mot-clé contenu dans son titre.
+
+---- Comment ----
+Un commentaire est nécessairement lié à un topic. Si il ne l'est pas, il est supprimé.
+La recherche de commentaire peut se faire par mot-clé contenu dans son corpus ou dans le nom de son auteur.
+
+
+#### Etat actuel du projet ###
+La base de donnée est liée aux entités, la cohérence est maintenue grâce à l'ORM Hibernate (JPA).
+Les DAO et les services sont codés et vérifiés grâce aux tests JUnit.
+
+Il manque :
+- Améliorer les tests (notamment vérifier le bon fonctionnement de toutes les méthodes pour Comment)
+- Passer de l'EntityManager à un SessionFactory pour permettre les fetch en LAZY
+- La mise au point des webservices REST (en particulier les addXxx)
+- Le Front (JSF ou AngularJS)
+- La gestion des accès aux méthodes selon le rôle (spring-security)
+
+
