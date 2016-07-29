@@ -16,6 +16,6 @@ public interface IUserService {
 	public User getUserById(Long idUser);
 	public List<User> getUserByKeyWord(String keyWord);
 	List<User> getUserByAddress(Address address);
-	List<User> getUsersBySkill(Skill skill);
+	List<User> getUsersBySkill(String skillName, Integer level);
 
 }

@@ -60,7 +60,7 @@ public class UserServiceImpl implements IUserService{
 	}
 	
 	@Override
-	public List<User> getUsersBySkill(Skill skill) {
-		return userDao.getUsersBySkill(skill);
+	public List<User> getUsersBySkill(String skillName, Integer level) {
+		return userDao.getUsersBySkill(skillName, level);
 	}
 }

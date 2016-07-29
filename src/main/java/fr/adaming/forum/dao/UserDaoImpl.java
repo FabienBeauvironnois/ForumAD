@@ -1,7 +1,6 @@
 package fr.adaming.forum.dao;
 
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import fr.adaming.forum.entity.Address;
-import fr.adaming.forum.entity.Skill;
 import fr.adaming.forum.entity.User;
 
 @Component
@@ -57,7 +55,7 @@ public class UserDaoImpl implements IUserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAllUser() {
-		Query query = em.createQuery("From User");
+		Query query = em.createQuery("From User u JOIN u.formation JOIN u.company");
 		List<User> result = query.getResultList();
 		log.info("Il y a " + result.size() + " utilisateur(s) !");
 		return result;
@@ -77,12 +75,14 @@ public class UserDaoImpl implements IUserDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> getUsersBySkill(Skill skill) {
+	public List<User> getUsersBySkill(String skillName , Integer level) {
 		Query query = em.createQuery(
-				"FROM User u INNER JOIN u.skills s WHERE s.skillName LIKE :name AND s.skillLevel BETWEEN :level AND 5");
+				"FROM User u JOIN u.skills us "
+				+ "WHERE us.skillName LIKE :name "
+				+ "AND us.skillLevel BETWEEN :level AND 5");
 
-		query.setParameter("name", skill.getSkillName());
-		query.setParameter("level", skill.getSkillLevel());
+		query.setParameter("name", skillName);
+		query.setParameter("level", level);
 		
 		List<User> result = query.getResultList();
 		log.info(result.size() + "utilisateur(s) ont été trouvé !");
@@ -93,7 +93,13 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> getUserByKeyWord(String keyWord) {
 		Query query = em.createQuery(
-				"FROM User u INNER JOIN u.formation f JOIN u.company c WHERE u.firstName LIKE :x OR u.name LIKE :x OR f.formationName LIKE :x OR c.companyName LIKE :x OR c.companyName LIKE :x OR c.companyAddress.city LIKE :x OR c.companyAddress.country LIKE :x OR u.personalAddress.city LIKE :x OR u.personalAddress.country LIKE :x");
+				"FROM User WHERE formation.formationName LIKE :x "
+						+ "OR company.companyAddress.city LIKE :x "
+						+ "OR company.companyAddress.country LIKE :x "
+						+ "OR company.companyName LIKE :x "
+						+ "OR firstName LIKE :x "
+						+ "OR personalAddress.city LIKE :x "
+						+ "OR personalAddress.country LIKE :x");
 
 		query.setParameter("x", "%" + keyWord + "%");
 		List<User> result = query.getResultList();

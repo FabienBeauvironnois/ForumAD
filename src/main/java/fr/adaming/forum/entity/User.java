@@ -66,11 +66,11 @@ public class User {
 	 * On tente rôle ici mais on verra à la longue s'il ne faut pas le mettre en List.
 	 */
 	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name="idRole")
-	@JsonBackReference
-	private Role role;
+//	@NotNull
+//	@ManyToOne
+//	@JoinColumn(name="idRole")
+//	@JsonBackReference
+//	private Role role;
 	
 	@NotNull
 	private Date dateOfBirth; 
@@ -104,14 +104,13 @@ public class User {
 	@JsonBackReference
 	private Formation formation; 
 
-	public User(String firstName, String name, Address personalAddress, Company company, Role role, String email,
+	public User(String firstName, String name, Address personalAddress, Company company, String email,
 			String password, Formation formation, Date dateOfBirth) {
 		super();
 		this.firstName = firstName;
 		this.name = name;
 		this.personalAddress = personalAddress;
 		this.company = company;
-		this.role = role;
 		this.email = email;
 		this.password = password;
 		this.formation = formation;
@@ -154,13 +153,13 @@ public class User {
 		this.company = company;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 
 	public String getEmail() {
 		return email;
