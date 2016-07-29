@@ -55,4 +55,9 @@ public class SkillServiceImpl implements ISkillService{
 		return skillDao.getSkillById(idSkill);
 	}
 
+	@Override
+	public Collection<Skill> getSkill(Skill skill) {
+		return skillDao.getSkill(skill);
+	}
+	
 }

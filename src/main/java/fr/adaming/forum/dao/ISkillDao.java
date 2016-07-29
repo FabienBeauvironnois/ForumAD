@@ -14,5 +14,6 @@ public interface ISkillDao {
 	public Skill deleteSkill(Long idSkill);
 	public Collection<Skill> getAllSkills ();
 	public Skill getSkillById(Long idSkill);
+	public Collection<Skill> getSkill(Skill skill);
 
 }

@@ -50,7 +50,8 @@ public class SkillDaoImpl implements ISkillDao {
 	public Skill updateSkill(Skill skill) {
 		em.merge(skill);
 		log.info("La compétence " + skill.getSkillName() + " a été mise à jour!");
-		return em.find(Skill.class, skill.getIdSkill());
+		//return em.find(Skill.class, skill.getIdSkill());
+		return skill;
 	}
 
 	@Override
@@ -83,4 +84,15 @@ public class SkillDaoImpl implements ISkillDao {
 		return skill;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Skill> getSkill(Skill skill) {
+		Query query = em.createQuery("FROM Skill s WHERE s.skillName LIKE :name AND s.skillLevel LIKE :level");
+		query.setParameter("name", skill.getSkillName());
+		query.setParameter("level", skill.getSkillLevel());
+		Collection<Skill> result = query.getResultList();
+		log.info("Il y a " + result.size() + "compétences");
+		return result;
+	}
+	
 }

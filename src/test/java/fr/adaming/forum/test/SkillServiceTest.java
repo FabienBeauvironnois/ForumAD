@@ -60,12 +60,21 @@ public class SkillServiceTest {
 		
 		assertNotNull(skill);
 	}
-	
+
+	@Test
+	public void testGetSkill(){
+		Skill skill = new Skill(".NET", 4);
+		skill = service.addSkill(skill);
+		Collection<Skill> skills = service.getSkill( new Skill(skill.getSkillName(), skill.getSkillLevel()) );
+		
+		assertTrue(skills.size()>0);
+	}
 	@Test
 	public void testGetAllSkills(){
 		Collection<Skill> skill = service.getAllSkills();
 		assertNotNull(skill);
 	}
+
 	
 	@Test
 	public void testGetSkillByKeyword(){

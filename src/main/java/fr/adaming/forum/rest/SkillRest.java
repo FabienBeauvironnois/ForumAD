@@ -47,6 +47,11 @@ public class SkillRest {
 	public Skill getSkillById(@PathVariable Long idSkill){
 		return skillservice.getSkillById(idSkill);
 	}
+
+	@RequestMapping(value="/getSkill/name={name}&level={level}", method=RequestMethod.GET)
+	public Collection<Skill> getSkillById(@PathVariable String name, @PathVariable Integer level){
+		return skillservice.getSkill(new Skill(name, level));
+	}
 	
 	@RequestMapping(value="/getSkillByKeyWord/{keyWord}", method=RequestMethod.GET)
 	public Collection<Skill> getSkillByKeyWord(@PathVariable String keyWord){
@@ -58,7 +63,7 @@ public class SkillRest {
 		return skillservice.deleteSkill(idSkill);
 	}
 	
-	@RequestMapping(value="/updateSkill", method=RequestMethod.PUT)
+	@RequestMapping(value="/updateSkill", method={RequestMethod.PUT, RequestMethod.PATCH})
 	public Skill updateSkill(@RequestBody Skill skill){
 		return skillservice.updateSkill(skill);
 	}
